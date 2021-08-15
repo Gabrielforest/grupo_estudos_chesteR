@@ -1,4 +1,4 @@
-# Grupo de Estudos chesteR
+# Grupo de Estudos
 
 ![](https://github.com/Gabrielforest/grupo_estudos_chesteR/blob/main/logo_chesteR.png?raw=true)
 
