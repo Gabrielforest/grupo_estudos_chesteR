@@ -12,7 +12,7 @@
 #edit (atalhos de digitação)
 
 
-#code -> ctrl + shift + R
+#code -> ctrl + shift + R ### dar título
 
 
 #view -> panes -> Pane Layout
@@ -20,10 +20,14 @@
 
 #plots - só fica disponível quando faço um gráfico:
 
+plot(c(1,2,3,4,5,6,7,8,9,10))
+# é igual a
 plot(c(1:10))
 
 
+#selecionar diretório de trabalho:   
 #session -> set working directory -> choose directory
+setwd("C:/Users/Desktop")
 
 
 #build - cria arquivos padrão em determinada tarefa
@@ -50,37 +54,66 @@ plot(c(1:10))
 
 
 #adição
+1+1
+#ou
+1 + 1
+#ou
+(1+1)
 
 #subtração
+1-1
+#ou
+1 - 1
+#ou
+(1-1)
 
 #divisão
+2 / 2
 
 #multiplicação
+5 * 5
 
 #exponenciação pode ser feita de dois jeitos com ** ou ^
+2**2
+2^2
 
 #resto de divisão %%
-
+4%%2
 
 
 
 # Criando variáveis -------------------------------------------------------
 
+#alt -  (atalho pra definir variáveis)
+amigão <- 2
+
+# definindo o preço do maracuja (variável):
+maracuja <- 5
+
+# maracujaia sinônimo de maracuja:
+maracujaia <- maracuja
+
+# alterei o preço do maracuja:
+maracuja <- 6
+
+maracujaia
+
+# concatenando variável (escrevendo mais de um valor)
+maracuja <- c(6, 5)
 
 
 Variavel <- amigão         #erro
 
 Variavel <- "amigão"
 
-x <- 120
-Variavel <- x**2
+# concatenando variável (escrevendo mais de um valor)
+variavel <- c("amigão", "amiguinha")
+
+# variavel x e defini variavel como x
+x <- "letra"   
+Variavel <- x^2    # erro de formato da variavel (letra nao faz conta)
 Variavel
 
-y <- c(1:10)             #c funciona para criar um vetor
-y
-
-z <- 1:10
-z
 
 #devido ao padrão do R, é possível tornar um vetor uma função:
 
@@ -89,6 +122,17 @@ c                 #retorna "amigão"
 
 c(1,2,3)
 c                 #o que vai retornar?
+
+#amigão
+
+# excluindo uma variável:
+rm(c)
+
+# excluindo 2 variáveis:
+rm(c, x)
+
+# excluindo todas as variáveis:
+rm(list = ls())
 
 
 
