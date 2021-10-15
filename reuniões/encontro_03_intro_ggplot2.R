@@ -6,7 +6,7 @@
 
 # Gráficos ggplot2 --------------------------------------------------------
 
-install.packages("ggplot2")
+#install.packages("ggplot2")
 
 library(ggplot2)
 
@@ -20,13 +20,13 @@ library(ggplot2)
 # coordinate system           - coordenadas 
 # position adjustments        - posições de tudo
                     
-
+ggplot()
 
 
 #  sintaxe básica ggplot2: ------------------------------------------------
 
 
-# ggplot(data, mapping = aes()) +
+# ggplot(data = nome_tabela, mapping = aes(eixos)) +
 #   geom_ 
 
 
@@ -48,7 +48,6 @@ library(ggplot2)
 #   geom_histogram() 
 
 
-
 # Usando a base mtcars ----------------------------------------------------
 
 ggplot(data = mtcars,
@@ -61,24 +60,26 @@ ggplot(data = mtcars,
 # melhorando esse gráfico -------------------------------------------------
 
 # na base só tem variáveis numéricas
-View(mtcars)
-
+View()
+mtcars
 
 # gráfico com cores de acordo com a variável gear:
 ggplot(data = mtcars, 
        mapping = aes(x = mpg, y = drat)) +
   geom_point(aes(color = gear))
+  
 
 # explicação: o controle de eixos dentro da forma geométrica controla a cor do grupo
 
 
-ggplot(data = mtcars,
-       mapping = aes(x = mpg, y = drat)) +
+grafico_1 <- 
+  ggplot(data = mtcars,
+         mapping = aes(x = mpg, y = drat)) +
   geom_point(aes(color = factor(gear))) +
   stat_smooth(method = "lm",
               col = "blue",
               se = FALSE,
-              size = 1)
+              size = 5)
 
 # explicação: regressão linear (lm), cor da linha (col), não mostrar o erro padrão (se = FALSE)
 # tamanho da linha (size = 1).
@@ -87,11 +88,9 @@ ggplot(data = mtcars,
 
 
 
-
-
 # adicionando título:
 
-labs(title = "Gráfico mpg x drat")
+grafico_1 + labs(title = "Gráfico mpg x drat")
 
 
 
