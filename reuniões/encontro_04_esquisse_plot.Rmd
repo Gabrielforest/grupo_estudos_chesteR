@@ -1,0 +1,41 @@
+---
+title: "encontro_04"
+author: "Gabriel F. Pereira"
+date: "28/10/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(echo = FALSE)
+
+library(esquisse)
+library(ggplot2)
+library(dplyr)
+
+carros <- mtcars
+
+```
+
+# R Markdown
+
+Código para criar bloco de código: `ctrl + alt + i`
+
+## Gráfico Bonito
+
+Exemplo de gráfico ggplot2 feito no esquisse:
+
+```{r}
+
+carros %>%
+ filter(mpg >= 16.4 & mpg <= 34) %>%
+ ggplot() +
+ aes(x = mpg, y = drat, colour = as.factor(gear)) +
+ geom_point(shape = "circle", size = 1.5) +
+ scale_color_hue(direction = 1) +
+ labs(x = "Miles per Galoon", title = "Gráfico bonito")+
+ theme_minimal()
+
+
+```
+
