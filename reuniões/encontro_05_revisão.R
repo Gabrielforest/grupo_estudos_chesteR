@@ -9,25 +9,41 @@
 #alt -  (atalho pra definir variáveis)
 amigão <- 2
 
+# como os russos digitam:
+2 -> amigão 
+
 # definindo o preço do maracuja (variável):
 maracuja <- 5
 
 # maracujaia sinônimo de maracuja:
 maracujaia <- maracuja
 
+# valores iguais:
+maracujaia == maracuja
+
 # alterei o preço do maracuja:
 maracuja <- 6
 
-maracujaia
+# aqui mudei o valor, não são mais iguais
+maracujaia == maracuja
+
 
 # concatenando variável (escrevendo mais de um valor)
-maracuja <- c(6, 5)
+maracuja <- c(6.5, 5)
 
+#chamando valores por posição:
+maracuja[1]
+maracuja[2]
+
+rm(amigão)
 Variavel <- amigão         #erro
 Variavel <- "amigão"
 
 # concatenando variável (escrevendo mais de um valor)
 variavel <- c("amigão", "amiguinha")
+
+# posição:
+variavel[1]
 
 # caractere tem que ter aspas pra chamar
 class(variavel)
@@ -47,7 +63,7 @@ class(maçã)
 
 # gráficos ggplot
 # na base só tem variáveis numéricas
-View()
+# ctrl + botão esquerdo mouse em cima dos dados:
 mtcars
 
 
@@ -94,9 +110,15 @@ grafico_1 <-
   stat_smooth(method = "lm",
               col = "blue",
               se = FALSE,
-              size = 5)
+              size = 1)
 
-
+# pra fazer o LM é preciso escrever a última linha do código:
+ggplot(mt) +
+  aes(x = mpg, y = drat, colour = factor(gear)) +
+  geom_point(shape = "circle", size = 1.5) +
+  scale_color_hue(direction = 1) +
+  theme_minimal() +
+  geom_smooth(method = "lm", col = "red", color = "black", size = 0.5)
 
 # Gráficos por interface interativa ----------------------------------------
 
