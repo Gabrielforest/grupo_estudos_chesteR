@@ -1,0 +1,55 @@
+---
+title: "encontro 06"
+author: "Grupo de Estudos - chesteR"
+date: "20/01/2022"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+  theme: yeti
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(ISLR)
+library(car)
+library(olsrr)
+
+dados_venda <- Carseats
+
+fit1 <- lm(formula = Sales ~ CompPrice + Income + Advertising + Price + ShelveLoc + Age + Income:Advertising, data = dados_venda)
+
+
+```
+
+Regressão Linear
+===================================== 
+
+Column {data-width=550}
+-----------------------------------------------------------------------
+
+### Comportamento dos Resíduos
+
+```{r echo=FALSE, out.width="100%"}
+ols_plot_resid_fit(fit1)
+```
+
+Column {data-width=450}
+-----------------------------------------------------------------------
+
+### Modelo Ajustado
+
+```{r, out.width="70%"}
+fit1 <- lm(formula = Sales ~ CompPrice + Income + Advertising + Price + 
+     ShelveLoc + Age + Income:Advertising, data = dados_venda)
+summary(fit1)
+```
+
+Interpretações
+===================================== 
+
+```{r}
+
+
+```
+
