@@ -2,8 +2,11 @@
 #     chesteR - reunião 06   #
 ##############################
 
+#install.packages("ISLR")
+library(ISLR); # carregar o pacote que contém os dados que serão estudados
 
-library(ISLR); # pacote que contém os dados que serão estudados
+# dados de venda dos carrinho de bebê: 
+??Carseats
 
 # Regressão Linear --------------------------------------------------------
 
@@ -34,13 +37,16 @@ lm(formula = Sales ~ CompPrice + Income + Advertising + Price +
 # N ormality
 # E qual variance
 
+par(mfrow = c(2,2))
 plot(fit1)
 
 #ou
+#install.packages("olsrr")
+library(olsrr)
 
-olsrr::ols_plot_resid_fit(fit1)
-olsrr::ols_plot_resid_qq(fit1)
-olsrr::ols_plot_resid_hist(fit1)
+ols_plot_resid_fit(fit1)
+ols_plot_resid_qq(fit1)
+ols_plot_resid_hist(fit1)
 
 # Interpretação dos gráficos:
 
@@ -61,16 +67,16 @@ library(caret)
 cor(Boston)
 
 # testando normalidade:
-olsrr::ols_test_normality(fit1)
+ols_test_normality(fit1)
 # O teste de Shapiro-Wilk testa a normalidade.
 # Logo, se o valor de p for igual ou menor que 0.05, a   
 # hipótese de normalidade será rejeitada.
 
 # Testando multicolinearidade (VIF > 10 representa colinearidade entre variáveis)
 # que nem sempre é problemática, depende da situação na vida real.
-car::vif(fit1)
+vif(fit1)
 # obs.: a multicolinearidade aumenta a variância dos coeficientes estimados.
 
 # teste de heterocedasticidade Breusch-Pagan (LM requerem homocedasticidade)
-car::ncvTest(fit1)  
+ncvTest(fit1)  
 
