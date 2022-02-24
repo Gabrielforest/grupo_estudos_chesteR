@@ -1,0 +1,4 @@
+Sitemap: https://gabrielforest.github.io/FranklinTemplates.jl/sitemap.xml
+
+User-agent: *
+Disallow:
