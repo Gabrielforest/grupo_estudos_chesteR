@@ -16,7 +16,7 @@ ignore = ["node_modules/"]
 generate_rss = true
 website_title = "chesteR"
 website_descr = "Grupo de Estudos de R"
-website_url   = "https://gabrielforest.github.io/FranklinTemplates.jl/"
+website_url   = "https://gabrielforest.github.io/grupo_estudos_chesteR/"
 +++
 
 <!--

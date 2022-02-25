@@ -1,76 +1,75 @@
-+++
-title = "Operações"
-hascode = true
-date = Date(2021, 8, 19)
-rss = "A short description of the page which would serve as **blurb** in a `RSS` feed; you can use basic markdown here but the whole description string must be a single line (not a multiline string). Like this one for instance. Keep in mind that styling is minimal in RSS so for instance don't expect maths or fancy styling to work; images should be ok though: ![](https://upload.wikimedia.org/wikipedia/en/3/32/Rick_and_Morty_opening_credits.jpeg)"
-+++
++++ title = "Operações" hascode = true date = Date(2021, 8, 19) rss = "Grupo de estudos do CAEF (Centro Acadêmico de Engenharia Florestal) - referente a linguagem R. UFSCar campus Sorocaba." +++
 
-#     chesteR - reunião 01
-
+# chesteR - reunião 01
 
 ## Funcionalidades Rstudio:
 
-Definindo encoding padrão:
+Gerando um novo arquivo de código R:
 
-- aba File -> Reopen with enconding -> UTF-8 -> set as default 
+![](/assets/new_file_prt.png)
 
-Atalhos de digitação:
+Definindo encoding UTF-8 como padrão:
 
-- aba Edit 
+|       Salvando       |  definindo UTF-8   |
+|:--------------------:|:------------------:|
+![](/assets/save_encoding.png) | ![](/assets/def_encoding.png) |
 
 Título para sessões do código:
 
-- aba Code -> ctrl + shift + R ### dar título
+![](/assets/insert_section.png)
 
-Alterar layout:
+É possível utilizar atalhos para a maioria das funcionalidades do Rstudio. Por exemplo, para inserir título de uma sessão, pressionar as seguintes teclas em conjunto: ctrl + shift + R. Como demonstrado acima.
 
-- aba View -> panes -> Pane Layout
+Alterar layout da forma que preferir:
 
+![](/assets/layout.png)
 
-- a aba Plots - só fica disponível quando faço um gráfico:
+A aba Plots - só fica disponível quando faço um gráfico:
 
 ```r
 plot(c(1,2,3,4,5,6,7,8,9,10))
 ```
+
 observação, o código acima é equivalente a:
-```r
+
+``` 
 plot(c(1:10))
 ```
+os quais geram o seguinte gráfico:
 
-Selecionando diretório de trabalho:
+![](/assets/plot_1_10.png)
 
-- session -> set working directory -> choose directory
-ou
-```r
-setwd("C:/Users/Desktop")
+Escolhendo diretório de trabalho, local no qual 
+os arquivos de seu interesse estão localizados:
+
+![](/assets/setwd.png)
+
+ou escrever o diretório através do código, exemplo:
+
+``` 
+setwd("C:/Users/Gabriel/Desktop")
 ```
-Outras funcionalidades:
 
-- build - cria arquivos padrão em determinada tarefa
+Outras abas e funcionalidades:
 
+-   build - cria arquivos padrão em determinada tarefa
 
-- debug - forma como retorna o erro
+-   debug - forma como retorna o erro
 
+-   profile - como a memória ta sendo usada
 
-- profile - como a memória ta sendo usada
+-   tools - útil para comandos do github (acesso ao terminal)
 
-
-- tools - usar comandos do github e do prompt de comando abrindo um terminal
-
-
-- help -> cheatsheets -> (pdfs com várias informações)
+-   help -> cheatsheets -> (pdfs com várias informações)
 
 
-- comando: alt + shift + K (atalhos das opções e digitação)
-
-
+Curiosidade, comando: alt + shift + K (atalhos de digitação)
 
 ## Operações Matemáticas Básicas
 
-
-
 adição:
-```r
+
+``` 
 1+1
 # ou
 1 + 1
@@ -79,7 +78,8 @@ adição:
 ```
 
 subtração:
-```r 
+
+``` 
 1-1
 # ou
 1- 1
@@ -88,97 +88,112 @@ subtração:
 ```
 
 divisão:
-```r
+
+``` 
 2 / 2
 ```
 
 multiplicação:
-```r
+
+``` 
 5 * 5
 ```
 
-exponenciação pode ser feita de 2 modos, com ** ou ^
-```r
+exponenciação pode ser feita de 2 modos, com \*\* ou \^
+
+``` 
 2**2
 # ou 
 2^2
 ```
 
 resto de divisão %%
-```r
+
+``` 
 4%%2
 ```
 
-
 ## Criando variáveis
 
-alt -  (atalho pra definir variáveis)
-```r
+alt - (atalho pra definir variáveis)
+
+``` 
 amigão <- 2
 ```
 
 definindo o preço do maracuja (variável):
-```r
+
+``` 
 maracuja <- 5
 ```
 
 maracujaia "sinônimo" de maracuja:
-```r
+
+``` 
 maracujaia <- maracuja
 ```
 
 alterei o preço do maracuja:
-```r
+
+``` 
 maracuja <- 6
 ```
 
 concatenando variável (escrevendo mais de um valor)
-```r
+
+``` 
 maracuja <- c(6, 5)
 ```
 
 exemplo de caracteres:
-```r
+
+``` 
 Variavel <- amigão         #erro, pois caracteres necessitam de "" para serem definidos
 
 Variavel <- "amigão"       #correto
 ```
 
 concatenando variável (escrevendo mais de um valor)
-```r
+
+``` 
 variavel <- c("amigão", "amiguinha")
 ```
 
 variavel x e defini variavel como x
-```r
+
+``` 
 x <- "letra"   
 Variavel <- x^2    # erro de formato da variavel (caractere nao faz operação matemática)
 ```
 
 devido ao padrão do R, é possível tornar um vetor uma função:
-```r
+
+``` 
 c <- "amigão"  
 c                 #retorna "amigão"
 ```
 
 o que a variável c retornará no código seguinte?
-```r
+
+``` 
 c(1,2,3)
 c                 #retorna "amigão" pois não salvamos o vetor c(1,2,3) em c
 ```
 
 excluindo uma variável:
-```r
+
+``` 
 rm(c)
 ```
 
 excluindo 2 variáveis:
-```r
+
+``` 
 rm(c, x)
 ```
 
 excluindo todas as variáveis:
-```r
+
+``` 
 rm(list = ls())
 ```
-
