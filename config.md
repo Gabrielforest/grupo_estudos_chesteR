@@ -2,7 +2,7 @@
 Add here global page variables to use throughout your website.
 -->
 +++
-author = "Septimia Zenobia"
+author = "Gabriel de Freitas Pereira"
 mintoclevel = 2
 prepath = "grupo_estudos_chesteR"
 
@@ -14,8 +14,8 @@ ignore = ["node_modules/"]
 
 # RSS (the website_{title, descr, url} must be defined to get RSS)
 generate_rss = true
-website_title = "Franklin Template"
-website_descr = "Example website using Franklin"
+website_title = "chesteR"
+website_descr = "Grupo de Estudos de R"
 website_url   = "https://gabrielforest.github.io/FranklinTemplates.jl/"
 +++
 
