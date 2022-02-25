@@ -1,5 +1,3 @@
-+++ title = "Operações" hascode = true date = Date(2021, 8, 19) rss = "Grupo de estudos do CAEF (Centro Acadêmico de Engenharia Florestal) - referente a linguagem R. UFSCar campus Sorocaba." +++
-
 # chesteR - reunião 01
 
 ## Funcionalidades Rstudio:
