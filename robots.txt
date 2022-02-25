@@ -1,4 +1,4 @@
-Sitemap: https://gabrielforest.github.io/FranklinTemplates.jl/sitemap.xml
+Sitemap: https://gabrielforest.github.io/grupo_estudos_chesteR/sitemap.xml
 
 User-agent: *
 Disallow:
