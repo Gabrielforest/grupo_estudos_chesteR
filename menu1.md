@@ -24,13 +24,13 @@ Alterar layout da forma que preferir:
 
 A aba Plots - só fica disponível quando faço um gráfico:
 
-```r
+```R
 plot(c(1,2,3,4,5,6,7,8,9,10))
 ```
 
 observação, o código acima é equivalente a:
 
-``` 
+```R
 plot(c(1:10))
 ```
 os quais geram o seguinte gráfico:
@@ -44,7 +44,7 @@ os arquivos de seu interesse estão localizados:
 
 ou escrever o diretório através do código, exemplo:
 
-``` 
+```R
 setwd("C:/Users/Gabriel/Desktop")
 ```
 
@@ -67,7 +67,7 @@ Curiosidade, comando: alt + shift + K (atalhos de digitação)
 
 adição:
 
-``` 
+```R
 1+1
 # ou
 1 + 1
@@ -77,7 +77,7 @@ adição:
 
 subtração:
 
-``` 
+```R
 1-1
 # ou
 1- 1
@@ -87,19 +87,19 @@ subtração:
 
 divisão:
 
-``` 
+```R
 2 / 2
 ```
 
 multiplicação:
 
-``` 
+```R
 5 * 5
 ```
 
 exponenciação pode ser feita de 2 modos, com \*\* ou \^
 
-``` 
+```R 
 2**2
 # ou 
 2^2
@@ -107,7 +107,7 @@ exponenciação pode ser feita de 2 modos, com \*\* ou \^
 
 resto de divisão %%
 
-``` 
+```R
 4%%2
 ```
 
@@ -115,37 +115,37 @@ resto de divisão %%
 
 alt - (atalho pra definir variáveis)
 
-``` 
+```R
 amigão <- 2
 ```
 
 definindo o preço do maracuja (variável):
 
-``` 
+```R
 maracuja <- 5
 ```
 
 maracujaia "sinônimo" de maracuja:
 
-``` 
+```R 
 maracujaia <- maracuja
 ```
 
 alterei o preço do maracuja:
 
-``` 
+```R
 maracuja <- 6
 ```
 
 concatenando variável (escrevendo mais de um valor)
 
-``` 
+```R
 maracuja <- c(6, 5)
 ```
 
 exemplo de caracteres:
 
-``` 
+```R
 Variavel <- amigão         #erro, pois caracteres necessitam de "" para serem definidos
 
 Variavel <- "amigão"       #correto
@@ -153,45 +153,45 @@ Variavel <- "amigão"       #correto
 
 concatenando variável (escrevendo mais de um valor)
 
-``` 
+```R
 variavel <- c("amigão", "amiguinha")
 ```
 
 variavel x e defini variavel como x
 
-``` 
+```R
 x <- "letra"   
 Variavel <- x^2    # erro de formato da variavel (caractere nao faz operação matemática)
 ```
 
 devido ao padrão do R, é possível tornar um vetor uma função:
 
-``` 
+```R
 c <- "amigão"  
 c                 #retorna "amigão"
 ```
 
 o que a variável c retornará no código seguinte?
 
-``` 
+```R
 c(1,2,3)
 c                 #retorna "amigão" pois não salvamos o vetor c(1,2,3) em c
 ```
 
 excluindo uma variável:
 
-``` 
+```R
 rm(c)
 ```
 
 excluindo 2 variáveis:
 
-``` 
+```R
 rm(c, x)
 ```
 
 excluindo todas as variáveis:
 
-``` 
+```R
 rm(list = ls())
 ```
