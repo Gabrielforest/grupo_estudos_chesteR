@@ -1,0 +1,81 @@
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/grupo_estudos_chesteR/libs/highlight/github.min.css"> <link rel=stylesheet  href="/grupo_estudos_chesteR/css/franklin.css"> <link rel=stylesheet  href="/grupo_estudos_chesteR/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/grupo_estudos_chesteR/assets/favicon.png"> <title>chesteR - reunião 02</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h1><a href="/grupo_estudos_chesteR/">chesteR</a></h1> <p class=lead >R e Rstudio</p> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/grupo_estudos_chesteR/">Home</a> <a class="sidebar-nav-item " href="/grupo_estudos_chesteR/menu1/">Operações</a> <a class="sidebar-nav-item active" href="/grupo_estudos_chesteR/menu2/">Variáveis</a> </nav> <p>&copy; Gabriel de Freitas Pereira.</p> </div> </div> <div class="content container"> <div class=franklin-content ><h1 id="chester_-_reunião_02"><a href="#chester_-_reunião_02" class=header-anchor >chesteR - reunião 02</a></h1> <h2 id="tipos_básicos_de_variáveis"><a href="#tipos_básicos_de_variáveis" class=header-anchor >Tipos Básicos de Variáveis </a></h2> <ul> <li><p>numeric</p> <li><p>integer</p> <li><p>logical</p> <li><p>character</p> </ul> <p>Para identificar a classe da variável existe a função <code>class&#40;&#41;</code>, exemplos:</p> <pre><code class="R hljs"><span class=hljs-built_in >class</span><span class=hljs-punctuation >(</span><span class=hljs-number >10</span><span class=hljs-punctuation >)</span></code></pre>
+<p>&#91;1&#93; &quot;numeric&quot;</p>
+<p>Como vimos acima, o número representado não é considerado um inteiro no R, para ser considerado um inteiro é necessário representar da seguinte maneira com a letra L: </p>
+<pre><code class="R hljs"><span class=hljs-built_in >class</span><span class=hljs-punctuation >(</span><span class=hljs-number >10L</span><span class=hljs-punctuation >)</span></code></pre>
+<p>&#91;1&#93; &quot;integer&quot;</p>
+<p>Há diferenças entre os inteiros e os numéricos no R em relação ao espaço que eles ocupam na memória, os inteiros são mais leves, porém isso é significante apenas quando os dados são extensos demasiadamente.</p>
+<p>A classe de lógicos é representada de 4 formas:</p>
+<pre><code class="R hljs"><span class=hljs-built_in >class</span><span class=hljs-punctuation >(</span><span class=hljs-built_in >T</span><span class=hljs-punctuation >)</span>
+<span class=hljs-built_in >class</span><span class=hljs-punctuation >(</span><span class=hljs-built_in >F</span><span class=hljs-punctuation >)</span>
+<span class=hljs-comment ># ou</span>
+<span class=hljs-built_in >class</span><span class=hljs-punctuation >(</span><span class=hljs-literal >TRUE</span><span class=hljs-punctuation >)</span>
+<span class=hljs-built_in >class</span><span class=hljs-punctuation >(</span><span class=hljs-literal >FALSE</span><span class=hljs-punctuation >)</span></code></pre>
+<p>&#91;1&#93; &quot;logical&quot;</p>
+<p>Já os caracteres são representados através de aspas simples ou duplas, exemplo:</p>
+<pre><code class="R hljs"><span class=hljs-built_in >class</span><span class=hljs-punctuation >(</span><span class=hljs-string >&quot;variável&quot;</span><span class=hljs-punctuation >)</span>
+<span class=hljs-built_in >class</span><span class=hljs-punctuation >(</span><span class=hljs-string >&#x27;Variável&#x27;</span><span class=hljs-punctuation >)</span></code></pre>
+<p>&#91;1&#93; &quot;character&quot;</p>
+<p>Observações: convencionalmente são utilizadas aspas duplas no R, embora as simples sejam aceitas pelo software.</p>
+<h2 id="verificação_do_tipo_de_variável"><a href="#verificação_do_tipo_de_variável" class=header-anchor >Verificação do tipo de Variável </a></h2>
+<p>É possível que não saibamos qual a classe da variável pois elas podem ser definidas de diferentes formas. </p>
+<p>Definindo variáveis que serão verificadas:</p>
+<pre><code class="R hljs">var_a <span class=hljs-operator >&lt;-</span> <span class=hljs-string >&quot;5&quot;</span>
+
+var_b <span class=hljs-operator >&lt;-</span> 5
+
+var_c <span class=hljs-operator >&lt;-</span> 4.3
+
+var_d <span class=hljs-operator >&lt;-</span> <span class=hljs-string >&quot;TRUE&quot;</span></code></pre>
+<p>Teste de identificação:</p>
+<pre><code class="R hljs"><span class=hljs-built_in >is.integer</span><span class=hljs-punctuation >(</span>var_a<span class=hljs-punctuation >)</span></code></pre>
+<p>&#91;1&#93; FALSE</p>
+<p>A variável acima apesar de ser um número, ela foi definida entre aspas <code>var_a &lt;- &quot;5&quot;</code>, logo ela foi salva como um caractere.</p>
+<pre><code class="R hljs"><span class=hljs-built_in >is.character</span><span class=hljs-punctuation >(</span>var_b<span class=hljs-punctuation >)</span></code></pre>
+<p>&#91;1&#93; FALSE</p>
+<p>A variável <code>var_b &lt;- 5</code> é um numérico, lembrando que, se ela fosse definida da seguinte forma <code>var_b &lt;- 5L</code> ela seria da  classe de inteiros.</p>
+<pre><code class="R hljs"><span class=hljs-built_in >is.numeric</span><span class=hljs-punctuation >(</span>var_c<span class=hljs-punctuation >)</span></code></pre>
+<p>&#91;1&#93; TRUE</p>
+<p>A variável <code>var_c &lt;- 4.3</code> também é um numérico.</p>
+<pre><code class="R hljs"><span class=hljs-built_in >is.logical</span><span class=hljs-punctuation >(</span>var_d<span class=hljs-punctuation >)</span></code></pre>
+<p>&#91;1&#93; FALSE</p>
+<p>A variável <code>var_d &lt;- &quot;TRUE&quot;</code> não é um lógico por ter sido definida entre aspas, o que a torna um caractere.</p>
+<p>Obs.: o R possui diversas classes existentes, aqui foram abordadas as mais comuns e mais utilizadas. Sabendo disso, é importante saber que a função <code>is.</code> funciona em qualquer tipo de variável do R.</p>
+<h2 id="conversão_de_variáveis"><a href="#conversão_de_variáveis" class=header-anchor >Conversão de variáveis </a></h2>
+<p>É possível converter determinadas variáveis &#40;nem todas&#41;, veremos isso a seguir.</p>
+<p>Para alterar uma variável é necessário redefini-la &#40;salvar na memória do R a alteração&#41;. Iremos redefinir a variável <code>var_b &lt;- 5</code> que é um numérico para um inteiro, e testar se funcionou:</p>
+<pre><code class="R hljs">var_b <span class=hljs-operator >&lt;-</span> <span class=hljs-built_in >as.integer</span><span class=hljs-punctuation >(</span>var_b<span class=hljs-punctuation >)</span> <span class=hljs-comment >#redefinindo a variável</span>
+
+<span class=hljs-built_in >is.integer</span><span class=hljs-punctuation >(</span>var_b<span class=hljs-punctuation >)</span></code></pre>
+<p>&#91;1&#93; TRUE</p>
+<p>A variável <code>var_a &lt;- &quot;5&quot;</code> é um caractere que pode ser redefinido para inteiro ou numérico através da função <code>as.integer&#40;&#41;</code> ou <code>as.numeric&#40;&#41;</code>, como demonstrado a seguir:</p>
+<pre><code class="R hljs"><span class=hljs-built_in >as.integer</span><span class=hljs-punctuation >(</span>var_a<span class=hljs-punctuation >)</span>
+<span class=hljs-comment >#ou </span>
+<span class=hljs-built_in >as.numeric</span><span class=hljs-punctuation >(</span>var_a<span class=hljs-punctuation >)</span>
+
+<span class=hljs-comment ># ambas alterações acima funcionam, porém para salvar a alteração </span>
+<span class=hljs-comment ># fazemos a atribuição:</span>
+var_a <span class=hljs-operator >&lt;-</span> <span class=hljs-built_in >as.integer</span><span class=hljs-punctuation >(</span>var_a<span class=hljs-punctuation >)</span>
+<span class=hljs-comment >#ou</span>
+var_a <span class=hljs-operator >&lt;-</span> <span class=hljs-built_in >as.numeric</span><span class=hljs-punctuation >(</span>var_a<span class=hljs-punctuation >)</span></code></pre>
+<p>Seguindo a mesma ideia, a variável <code>var_d &lt;- &quot;TRUE&quot;</code> que é um caractere, aceita a alteração para lógico:</p>
+<pre><code class="R hljs"><span class=hljs-built_in >as.logical</span><span class=hljs-punctuation >(</span>var_d<span class=hljs-punctuation >)</span></code></pre>
+<p>&#91;1&#93; TRUE</p>
+<p>Alterar um numérico para inteiro também é possível através da função <code>as.integer&#40;&#41;</code>, no entanto um arredondamento é feito de forma automática no R, exemplo:</p>
+<pre><code class="R hljs">var_c <span class=hljs-operator >&lt;-</span> 4.3
+<span class=hljs-built_in >as.integer</span><span class=hljs-punctuation >(</span>var_c<span class=hljs-punctuation >)</span></code></pre>
+<p>&#91;1&#93; 4</p>
+<p>Mais exemplos...</p>
+<p>A variável definida abaixo não faz a conta, só salva como texto e a função <code>as.numeric&#40;&#41;</code> não funciona nessa ocasião:</p>
+<pre><code class="R hljs">var_a <span class=hljs-operator >&lt;-</span> <span class=hljs-string >&quot;5 + 5&quot;</span>
+
+<span class=hljs-built_in >as.numeric</span><span class=hljs-punctuation >(</span>var_a<span class=hljs-punctuation >)</span></code></pre>
+<p>&#91;1&#93; NA</p>
+<h2 id=atalhos ><a href="#atalhos" class=header-anchor >Atalhos:</a></h2>
+<p>Comentar variás linhas selecionadas de um código: ctrl &#43; shift &#43; c.      </p>
+<p>Atalho da função <code>View&#40;&#41;</code>: segura o ctrl e clica no nome da variável.</p>
+<div class=page-foot >
+    <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> Gabriel de Freitas Pereira. Last modified: February 26, 2022.
+    Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
+</div>
+</div>
+    </div>
