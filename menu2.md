@@ -134,8 +134,6 @@ as.integer(var_c)
 ```
 [1] 4
 
-Mais exemplos...
-
 A variável definida abaixo não faz a conta, só salva como texto e a função `as.numeric()` não funciona nessa ocasião:
 ```R
 var_a <- "5 + 5"
@@ -147,9 +145,9 @@ as.numeric(var_a)
 
 ## Atalhos:
 
-Comentar variás linhas selecionadas de um código: ctrl + shift + c.      
+Comentar variás linhas selecionadas de um código: `ctrl + shift + c`.      
 
-Atalho da função `View()`: segura o ctrl e clica no nome da variável.
+Atalho da função `View()`: segura o `ctrl` e clica no nome da variável.
 
 
 
