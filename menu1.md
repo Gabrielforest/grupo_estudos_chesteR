@@ -115,6 +115,7 @@ Resto de uma divisão %%:
 ```R
 4%%2
 ```
+[1] 0
 
 ## Criando variáveis
 
@@ -153,7 +154,10 @@ Exemplo de caracteres:
 
 ```R
 Variavel <- amigão         #erro, pois caracteres necessitam de "" para serem definidos
+```
+*Error: object 'amigão' not found*
 
+```R
 Variavel <- "amigão"       #correto
 ```
 
