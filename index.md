@@ -14,5 +14,7 @@ Nessa página serão postados documentos referentes aos scripts de cada reunião
 
 -   [Pacote de Interface Gráfica - esquisse](/menu4/)
 
+-   [Regressão Linear](/menu5/)
+
 
  Obs.: os materiais postados aqui requerem a instalação do [R](https://cran.r-project.org/) e [Rstudio](https://www.rstudio.com/products/rstudio/download/#download).
