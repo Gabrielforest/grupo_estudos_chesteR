@@ -55,7 +55,7 @@ esquisser()
 ```
 E logo a janela irá aparecer, sendo extremamente intuitiva o modo de usar. Com ela é possível criar gráficos a partir de dados gerados pelo usuário ou dados presentes na base do R ou em outros pacotes existentes.
 
-![](/assets/esquisse.png)
+![](/assets/esquisse.PNG)
 
 Com essa interface nós geramos o seguinte código em `ggplot2` sem escrever 1 linha de código, apenas copiando e colando o código gerado pela interface gráfica de forma manual após selecionar os elementos e filtros de interesse (o `esquisse` utiliza o pacote `dplyr` para fazer as filtragens, por conta disso nós carregamos esse pacote).
 
