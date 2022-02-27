@@ -1,0 +1,93 @@
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/grupo_estudos_chesteR/libs/highlight/github.min.css"> <link rel=stylesheet  href="/grupo_estudos_chesteR/css/franklin.css"> <link rel=stylesheet  href="/grupo_estudos_chesteR/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/grupo_estudos_chesteR/assets/favicon.png"> <title>chesteR - reunião 06</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h1><a href="/grupo_estudos_chesteR/">chesteR</a></h1> <p class=lead >R e Rstudio</p> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/grupo_estudos_chesteR/">Home</a> <a class="sidebar-nav-item " href="/grupo_estudos_chesteR/menu1/">Operações</a> <a class="sidebar-nav-item " href="/grupo_estudos_chesteR/menu2/">Variáveis</a> <a class="sidebar-nav-item " href="/grupo_estudos_chesteR/menu3/">Pacote ggplot2</a> <a class="sidebar-nav-item " href="/grupo_estudos_chesteR/menu4/">Pacote esquisse</a> <a class="sidebar-nav-item active" href="/grupo_estudos_chesteR/menu5/">Regressão linear</a> </nav> <p>&copy; Gabriel de Freitas Pereira.</p> </div> </div> <div class="content container"> <div class=franklin-content ><h1 id="chester_-_reunião_06"><a href="#chester_-_reunião_06" class=header-anchor >chesteR - reunião 06</a></h1> <h2 id="regressão_linear"><a href="#regressão_linear" class=header-anchor >Regressão Linear</a></h2> <p>Como visto no encontro anterior, o seguinte código instala os pacotes &#40;caso você não tenha instalado&#41; e os carrega para utilização:</p> <pre><code class="R hljs">pacotes <span class=hljs-operator >&lt;-</span> <span class=hljs-built_in >c</span><span class=hljs-punctuation >(</span><span class=hljs-string >&quot;ISLR&quot;</span><span class=hljs-punctuation >,</span> <span class=hljs-string >&quot;olsrr&quot;</span><span class=hljs-punctuation >,</span> <span class=hljs-string >&quot;car&quot;</span><span class=hljs-punctuation >)</span>
+
+install_library <span class=hljs-operator >&lt;-</span> lapply<span class=hljs-punctuation >(</span>pacotes<span class=hljs-punctuation >,</span>
+FUN <span class=hljs-operator >=</span> <span class=hljs-keyword >function</span><span class=hljs-punctuation >(</span>x<span class=hljs-punctuation >)</span> <span class=hljs-punctuation >{</span><span class=hljs-keyword >if</span> <span class=hljs-punctuation >(</span><span class=hljs-operator >!</span>require<span class=hljs-punctuation >(</span>x<span class=hljs-punctuation >,</span> character.only <span class=hljs-operator >=</span> <span class=hljs-literal >TRUE</span><span class=hljs-punctuation >)</span><span class=hljs-punctuation >)</span> <span class=hljs-punctuation >{</span>
+      install.packages<span class=hljs-punctuation >(</span>x<span class=hljs-punctuation >,</span> dependencies <span class=hljs-operator >=</span> <span class=hljs-literal >TRUE</span><span class=hljs-punctuation >)</span>
+      library<span class=hljs-punctuation >(</span>x<span class=hljs-punctuation >,</span> character.only <span class=hljs-operator >=</span> <span class=hljs-literal >TRUE</span><span class=hljs-punctuation >)</span>
+    <span class=hljs-punctuation >}</span>
+  <span class=hljs-punctuation >}</span>
+<span class=hljs-punctuation >)</span></code></pre> <ul> <li><p><code>ISLR</code> pacote que contém os dados que serão estudados;</p> <li><p><code>olsrr</code> pacote para visualizar gráficos de premissa para regressão linear;</p> <li><p><code>car</code> pacote para testar multicolinearidade e teste de homocedastecidade.</p> </ul> <h1 id="regressão_linear__2"><a href="#regressão_linear__2" class=header-anchor >Regressão Linear</a></h1> <p>Informações sobre os dados de venda de assento de carro para bebê, que iremos utilizar para gerar o modelo linear: </p> <pre><code class="R hljs"><span class=hljs-operator >?</span><span class=hljs-operator >?</span>Carseats</code></pre>
+<p>Renomeando a base de dados:</p>
+<pre><code class="R hljs">dados_venda <span class=hljs-operator >&lt;-</span> Carseats</code></pre>
+<p>A partir das variáveis fornecidas pela base, podemos gerar um modelo para prever o valor das cadeiras de bebê, de acordo com os outros fatores existentes. Com isso será possível notar quais variáveis influenciam nas vendas de forma geral.</p>
+<p>Criando o modelo de regressão linear entre as variáveis de venda de  cadeirinha de bebê, através da função <code>lm&#40;&#41;</code>. Obs.: lm &#61; linear model:</p>
+<pre><code class="R hljs">fit1 <span class=hljs-operator >&lt;-</span> lm<span class=hljs-punctuation >(</span>formula <span class=hljs-operator >=</span> Sales <span class=hljs-operator >~</span> .<span class=hljs-punctuation >,</span> data <span class=hljs-operator >=</span> dados_venda<span class=hljs-punctuation >)</span>; summary<span class=hljs-punctuation >(</span>fit1<span class=hljs-punctuation >)</span></code></pre>
+<p><img src="/grupo_estudos_chesteR/assets/fit1_stats_1.png" alt="" /></p>
+<p>A partir desse resultado, retiramos as variáveis que não eram significativas:</p>
+<pre><code class="R hljs">fit1 <span class=hljs-operator >&lt;-</span> update<span class=hljs-punctuation >(</span>fit1<span class=hljs-punctuation >,</span> <span class=hljs-operator >~</span> . <span class=hljs-operator >-</span> Population <span class=hljs-operator >-</span> Education <span class=hljs-operator >-</span> Urban <span class=hljs-operator >-</span> US<span class=hljs-punctuation >)</span>; summary<span class=hljs-punctuation >(</span>fit1<span class=hljs-punctuation >)</span></code></pre>
+<p><img src="/grupo_estudos_chesteR/assets/fit1_stats_2.png" alt="" /></p>
+<p>E com isso criamos 2 variáveis de interação que podem ser úteis:</p>
+<pre><code class="R hljs">fit1 <span class=hljs-operator >&lt;-</span> update<span class=hljs-punctuation >(</span>fit1<span class=hljs-punctuation >,</span> <span class=hljs-operator >~</span> . <span class=hljs-operator >+</span> Income<span class=hljs-operator >:</span>Advertising <span class=hljs-operator >+</span> Age<span class=hljs-operator >:</span>Price<span class=hljs-punctuation >)</span>; summary<span class=hljs-punctuation >(</span>fit1<span class=hljs-punctuation >)</span></code></pre>
+<p><img src="/grupo_estudos_chesteR/assets/fit1_stats_3.png" alt="" /></p>
+<p>No entanto, a interação entre preço e idade não é significativa, por isso iremos retirar essa variável:</p>
+<pre><code class="R hljs">fit1 <span class=hljs-operator >&lt;-</span> update<span class=hljs-punctuation >(</span>fit1<span class=hljs-punctuation >,</span> <span class=hljs-operator >~</span> . <span class=hljs-operator >-</span> Age<span class=hljs-operator >:</span>Price<span class=hljs-punctuation >)</span>; summary<span class=hljs-punctuation >(</span>fit1<span class=hljs-punctuation >)</span></code></pre>
+<p><img src="/grupo_estudos_chesteR/assets/fit1_stats_4.png" alt="" /></p>
+<p>Código equivalente ao chegar no final dos ajustes:</p>
+<pre><code class="R hljs">lm<span class=hljs-punctuation >(</span>formula <span class=hljs-operator >=</span> Sales <span class=hljs-operator >~</span> CompPrice <span class=hljs-operator >+</span> Income <span class=hljs-operator >+</span> Advertising <span class=hljs-operator >+</span> Price <span class=hljs-operator >+</span> 
+     ShelveLoc <span class=hljs-operator >+</span> Age <span class=hljs-operator >+</span> Income<span class=hljs-operator >:</span>Advertising<span class=hljs-punctuation >,</span> data <span class=hljs-operator >=</span> dados_venda<span class=hljs-punctuation >)</span></code></pre>
+<h2 id="premissas_de_uma_regressão_linear_line"><a href="#premissas_de_uma_regressão_linear_line" class=header-anchor >Premissas de uma regressão linear &#40;LINE&#41;:</a></h2>
+<ul>
+<li><p><strong>L</strong> inearity </p>
+
+<li><p><strong>I</strong> ndependence</p>
+
+<li><p><strong>N</strong> ormality</p>
+
+<li><p><strong>E</strong> qual variance</p>
+
+</ul>
+<p>As premissas acima podem ser analisadas graficamente através dos gráficos do modelo:</p>
+<pre><code class="R hljs">par<span class=hljs-punctuation >(</span>mfrow <span class=hljs-operator >=</span> <span class=hljs-built_in >c</span><span class=hljs-punctuation >(</span><span class=hljs-number >2</span><span class=hljs-punctuation >,</span><span class=hljs-number >2</span><span class=hljs-punctuation >)</span><span class=hljs-punctuation >)</span>; <span class=hljs-comment ># definindo o layout da página com 2 colunas e 2 linhas </span>
+                     <span class=hljs-comment ># para comportar todos os 4 gráficos do plot(fit1)</span>
+plot<span class=hljs-punctuation >(</span>fit1<span class=hljs-punctuation >)</span></code></pre>
+<p><img src="/grupo_estudos_chesteR/assets/plot_fit1.png" alt="" /></p>
+<p>ou utilizando as funções do pacote <code>olsrr</code> as quais geram alguns dos mesmos gráficos  vistos acima mas com layout mais elaborado:</p>
+<ul>
+<li><p><code>ols_plot_resid_fit&#40;fit1&#41;; # gráfico de resíduos</code></p>
+
+<li><p><code>ols_plot_resid_qq&#40;fit1&#41;; # gráfico de quantiles</code></p>
+
+<li><p><code>ols_plot_resid_hist&#40;fit1&#41; # histograma</code></p>
+
+</ul>
+<p>Aqui, por simplicidade, seguiremos utilizando apenas os gráficos gerados pela função <code>plot&#40;&#41;</code> para fazermos as interpretações.</p>
+<h2 id="interpretação_dos_gráficos"><a href="#interpretação_dos_gráficos" class=header-anchor >Interpretação dos gráficos:</a></h2>
+<ul>
+<li><p>Residuals x Fitted values: demonstra se os resíduos têm padrões não lineares, </p>
+
+</ul>
+<p>nesse caso a linha vermelha indica um padrão linear.</p>
+<ul>
+<li><p>Normal Q-Q: demonstra se os resíduos têm distribuição normal, nesse caso</p>
+
+</ul>
+<p>os resíduos seguem a distribuição normal &#40;linha pontilhada&#41;.  </p>
+<ul>
+<li><p>Scale Location: demonstra se os resíduos são distribuídos ao redor dos preditores,</p>
+
+</ul>
+<p>esse gráfico representa a homocedastecidade &#40;resíduos igualmente distribuídos&#41; de forma clara.</p>
+<ul>
+<li><p>Residuals x Leverage: pontos fora dessa distância, alcançando o extremo superior direito</p>
+
+</ul>
+<p>ou inferior direito com linhas pontilhadas vermelhas nessa posições indicam não linearidade ou a presença de outliers. Nesse caso isso não acontece.</p>
+<p>Além da análise gráfica, a qual pode não ser conclusiva, é possível testar numericamente as premissas da regressão linear. Com isso temos o teste de normalidade, de colinearidade e de heterocedasticidade.</p>
+<p>Testando normalidade:</p>
+<pre><code class="R hljs">ols_test_normality<span class=hljs-punctuation >(</span>fit1<span class=hljs-punctuation >)</span></code></pre>
+<table><tr><th align=center >Test<th align=center >Statistic<th align=center >pvalue<tr><td align=center >Shapiro-Wilk<td align=center >0.9969<td align=center >0.6563<tr><td align=center >Kolmogorov-Smirnov<td align=center >0.0316<td align=center >0.8193<tr><td align=center >Cramer-von Mises<td align=center >27.3033<td align=center >0.0000<tr><td align=center >Anderson-Darling<td align=center >0.2778<td align=center >0.6502</table>
+<p>O teste de Shapiro-Wilk testa a normalidade. Logo, se o valor de p for igual ou menor que 0.05, a    hipótese de normalidade será rejeitada. Os demais testes também são semelhantes, com interpretações equivalentes à de que a distribuição  desses dados é normal.</p>
+<p>Testando multicolinearidade:  VIF &#40;Variation Inflation Factor&#41; &gt; 10 representa a colinearidade entre variáveis, que nem sempre é problemática, depende da situação na vida real.  Por isso é necessário agir com cuidado quando se pretende remover variáveis que apresentam esse comportamento.</p>
+<pre><code class="R hljs">vif<span class=hljs-punctuation >(</span>fit1<span class=hljs-punctuation >)</span></code></pre>
+<table><tr><th align=center >Variables<th align=center >GVIF<th align=center >Df<th align=center >GVIF^&#40;1/&#40;2*Df&#41;&#41;<tr><td align=center >CompPrice<td align=center >1.536280<td align=center >1<td align=center >1.239468<tr><td align=center >Income<td align=center >2.022959<td align=center >1<td align=center >1.422308<tr><td align=center >Advertising<td align=center >7.387554<td align=center >1<td align=center >2.718006<tr><td align=center >Price<td align=center >1.534807<td align=center >1<td align=center >1.238873<tr><td align=center >ShelveLoc<td align=center >1.015941<td align=center >1<td align=center >1.003962<tr><td align=center >Age<td align=center >1.022483<td align=center >1<td align=center >1.011179<tr><td align=center >Income:Advertising<td align=center >8.695282<td align=center >1<td align=center >2.948776</table>
+<p>Obs.: a multicolinearidade aumenta a variância dos coeficientes estimados, e dificulta a  interpretação do modelo, por esse motivo variáveis desse tipo costumam ser removidas do modelo. Nesse caso nenhuma variável apresentou VIF &gt; 10.</p>
+<p>Testando homocedastecidade Breusch-Pagan: Modelos lineares requerem homocedasticidade, isto é, os resíduos devem estar bem distribuídos.</p>
+<pre><code class="R hljs">ncvTest<span class=hljs-punctuation >(</span>fit1<span class=hljs-punctuation >)</span></code></pre>
+<p><em>Non-constant Variance Score Test Variance formula: ~ fitted.values Chisquare &#61; 0.1259146, Df &#61; 1, p &#61; 0.72271</em></p>
+<p>Se o valor de p for igual ou menor que 0.05, a    hipótese de homocedastecidade será rejeitada.  Logo, nesse caso, é possível afirmar estatisticamente que os resíduos estão bem distribuídos e que o modelo cumpre as premissas estatísticas. </p>
+<div class=page-foot >
+    <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> Gabriel de Freitas Pereira. Last modified: February 27, 2022.
+    Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
+</div>
+</div>
+    </div>
