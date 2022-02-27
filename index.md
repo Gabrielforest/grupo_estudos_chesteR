@@ -10,7 +10,9 @@ Nessa página serão postados documentos referentes aos scripts de cada reunião
 
 -   [Tipos de Variáveis](/menu2/)
 
--   [Introdução ao pacote ggplot2](/menu3/)
+-   [Introdução ao Pacote de Visualização de Dados - ggplot2](/menu3/)
+
+-   [Pacote de Interface Gráfica - esquisse](/menu4/)
 
 
  Obs.: os materiais postados aqui requerem a instalação do [R](https://cran.r-project.org/) e [Rstudio](https://www.rstudio.com/products/rstudio/download/#download).
