@@ -17,7 +17,6 @@ FUN = function(x) {if (!require(x, character.only = TRUE)) {
 - `ISLR` pacote que contém os dados que serão estudados;
 - `olsrr` pacote para visualizar gráficos de premissa para regressão linear;
 - `car` pacote para testar multicolinearidade e teste de homocedastecidade.
-# Regressão Linear --------------------------------------------------------
 
 Informações sobre os dados de venda de assento de carro para bebê, que iremos
 utilizar para gerar o modelo linear: 
@@ -38,7 +37,7 @@ cadeirinha de bebê, através da função `lm()`. Obs.: lm = linear model:
 ```R
 fit1 <- lm(formula = Sales ~ ., data = dados_venda); summary(fit1)
 ```
-![](/assets/fit1_stats_1.png)
+![](/assets/fit1_stats_1.PNG)
 
 Note que para construirmos o modelo, foram utilizados 2 argumentos: `formula` e
 `data`. Na fórmula do modelo nós precisamos colocar antes do `~` a variável dependente,
@@ -56,21 +55,21 @@ significativas. E para fazer isso basta subtraí-las na fórmula:
 ```R
 fit1 <- update(fit1, ~ . - Population - Education - Urban - US); summary(fit1)
 ```
-![](/assets/fit1_stats_2.png)
+![](/assets/fit1_stats_2.PNG)
 
 E com isso, criaremos 2 variáveis de interação que podem ser úteis. E para criar
 interação entre variáveis é necessário utilizar os dois pontos entre elas:
 ```R
 fit1 <- update(fit1, ~ . + Income:Advertising + Age:Price); summary(fit1)
 ```
-![](/assets/fit1_stats_3.png)
+![](/assets/fit1_stats_3.PNG)
 
 No entanto, a interação entre preço e idade não foi significativa, por isso iremos
 retirar essa variável do mesmo modo que subtraímos as demais:
 ```R
 fit1 <- update(fit1, ~ . - Age:Price); summary(fit1)
 ```
-![](/assets/fit1_stats_4.png)
+![](/assets/fit1_stats_4.PNG)
 
 A título de curiosidade a fórmula escrita 
 por extenso ao chegar no final dos ajustes 
