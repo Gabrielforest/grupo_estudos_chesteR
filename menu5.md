@@ -40,28 +40,41 @@ fit1 <- lm(formula = Sales ~ ., data = dados_venda); summary(fit1)
 ```
 ![](/assets/fit1_stats_1.png)
 
-A partir desse resultado, retiramos as variáveis que não eram
-significativas:
+Note que para construirmos o modelo, foram utilizados 2 argumentos: `formula` e
+`data`. Na fórmula do modelo nós precisamos colocar antes do `~` a variável dependente,
+e após o `~` colocamos as variáveis independentes. O `.` representa uma abreviação
+de que utilizaremos todas as variáveis presentes na base, ou seja, o `.` equivale 
+a escrever o nome de cada variável e colocar um sinal de `+` entre elas. Além disso,
+é importante notar que estamos utilizando `;` que representa uma quebra de linha, logo,
+estamos rodando 2 linhas de código em uma linha só. A segunda linha de código `summary(fit1)`
+nos apresenta o resumo dos resultados do modelo, os quais estão representados logo abaixo do 
+código.
+
+Sabendo disso, a partir do resultado do modelo, nós iremos retirar as variáveis que não foram
+significativas. E para fazer isso basta subtraí-las na fórmula:
 
 ```R
 fit1 <- update(fit1, ~ . - Population - Education - Urban - US); summary(fit1)
 ```
 ![](/assets/fit1_stats_2.png)
 
-E com isso criamos 2 variáveis de interação que podem ser úteis:
+E com isso, criaremos 2 variáveis de interação que podem ser úteis. E para criar
+interação entre variáveis é necessário utilizar os dois pontos entre elas:
 ```R
 fit1 <- update(fit1, ~ . + Income:Advertising + Age:Price); summary(fit1)
 ```
 ![](/assets/fit1_stats_3.png)
 
-No entanto, a interação entre preço e idade não é significativa, por isso iremos
-retirar essa variável:
+No entanto, a interação entre preço e idade não foi significativa, por isso iremos
+retirar essa variável do mesmo modo que subtraímos as demais:
 ```R
 fit1 <- update(fit1, ~ . - Age:Price); summary(fit1)
 ```
 ![](/assets/fit1_stats_4.png)
 
-Código equivalente ao chegar no final dos ajustes:
+A título de curiosidade a fórmula escrita 
+por extenso ao chegar no final dos ajustes 
+(não é necessário escrevê-la assim), foi equivalente a:
 ```R
 lm(formula = Sales ~ CompPrice + Income + Advertising + Price + 
      ShelveLoc + Age + Income:Advertising, data = dados_venda)
