@@ -1,7 +1,7 @@
 ---
-title: "encontro 06"
+title: "encontro 07"
 author: "Grupo de Estudos - chesteR"
-date: "20/01/2022"
+date: "16/03/2022"
 output: 
   flexdashboard::flex_dashboard:
     orientation: columns
@@ -22,34 +22,37 @@ fit1 <- lm(formula = Sales ~ CompPrice + Income + Advertising + Price + ShelveLo
 
 ```
 
-Regressão Linear
+Primeira Aba
 ===================================== 
 
-Column {data-width=550}
+Column {data-width=500}
 -----------------------------------------------------------------------
 
-### Comportamento dos Resíduos
+### Bahia
 
-```{r echo=FALSE, out.width="100%"}
+```{r echo=FALSE, out.width="60%", fig.cap="BAHIA, RECEBA!"}
+knitr::include_graphics("bahia.jpg")
+```
+
+### Contas
+
+```{r, echo=TRUE}
+1 + 1
+```
+
+
+Column {data-width=500}
+-----------------------------------------------------------------------
+
+### Gráfico de resíduos
+
+```{r}
 ols_plot_resid_fit(fit1)
 ```
 
-Column {data-width=450}
------------------------------------------------------------------------
-
-### Modelo Ajustado
-
-```{r, out.width="70%"}
-fit1 <- lm(formula = Sales ~ CompPrice + Income + Advertising + Price + 
-     ShelveLoc + Age + Income:Advertising, data = dados_venda)
-summary(fit1)
-```
 
 Interpretações
 ===================================== 
 
-```{r}
-
-
-```
+Aprendemos como inserir imagens e códigos no flexdashboard
 
