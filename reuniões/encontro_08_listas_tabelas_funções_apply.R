@@ -6,15 +6,23 @@
 
 # listas ------------------------------------------------------------------
 
-list(itens_limpeza = c("detergente", "amaciante", "sabão em pó"),
-     itens_alimentacao =  c("alface", "soja", "pepino"))
+lista <- list(itens_limpeza = c("detergente", "amaciante", "sabão em pó"),
+              itens_alimentacao =  c("alface", "soja", "pepino"),
+              itens_farmacia = c("alfabisabolol", "predicim", "rivotril"))
 
+lista$itens_limpeza
 
 
 # tabelas -----------------------------------------------------------------
 
+tabela <- data.frame(itens_limpeza = c("detergente", "amaciante", "sabão em pó"),
+                     itens_alimentacao =  c("alface", "soja", "pepino"),
+                     itens_farmacia = c("alfabisabolol", "predicim", "rivotril"))
+View(tabela)
+
 # conjunto de dados do R
 
+#encontrar os dados de base:
 data()
 
 # atribuindo um novo nome apenas pra deixar mais claro o que são os dados:
@@ -39,6 +47,15 @@ apply(X = dados_plantas[,1:4], MARGIN = 1, FUN = mean)
 
 lapply(X = dados_plantas, FUN = class)
 
+# criando funções personalizadas, exemplo: 
+somatoria <- function(x , y) { x + y }
+somatoria(x = 1, y = 2)
+
+# outro exemplo de função
+oi <- function(nome) {paste0("oi ", nome)}
+oi(nome = "Gabriel")
+
+# usando função personalizada no lapply
 lapply(X = dados_plantas, FUN = function(x) {x + 1})
 
 
@@ -51,14 +68,12 @@ sapply(X = dados_plantas, FUN = levels)
 
 ## mapply - versão multivariada do apply
 
-mapply(FUN = function(x, y) {x + y}, 
-       x = dados_plantas$Sepal.Length, 
-       y = dados_plantas$Sepal.Width)
+mapply(FUN = somatoria, x = dados_plantas$Sepal.Length, y = dados_plantas$Sepal.Width) 
 
 
 ## tapply - aplicar uma função para um grupo nivelado
 
-tapply(X = dados_plantas$Sepal.Length, INDEX = dados_plantas$Species, FUN = max)
+tapply(X = dados_plantas$Sepal.Length, INDEX = dados_plantas$Species, FUN = min)
 
 
 # Resumindo:
