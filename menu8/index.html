@@ -1,0 +1,82 @@
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/grupo_estudos_chesteR/libs/highlight/github.min.css"> <link rel=stylesheet  href="/grupo_estudos_chesteR/css/franklin.css"> <link rel=stylesheet  href="/grupo_estudos_chesteR/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/grupo_estudos_chesteR/assets/favicon.png"> <title>chesteR - reunião 09</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h1><a href="/grupo_estudos_chesteR/">chesteR</a></h1> <p class=lead >R e Rstudio</p> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/grupo_estudos_chesteR/">Home</a> <a class="sidebar-nav-item " href="/grupo_estudos_chesteR/menu1/">Operações</a> <a class="sidebar-nav-item " href="/grupo_estudos_chesteR/menu2/">Variáveis</a> <a class="sidebar-nav-item " href="/grupo_estudos_chesteR/menu3/">Pacote ggplot2</a> <a class="sidebar-nav-item " href="/grupo_estudos_chesteR/menu4/">Pacote esquisse</a> <a class="sidebar-nav-item " href="/grupo_estudos_chesteR/menu5/">Regressão linear</a> <a class="sidebar-nav-item " href="/grupo_estudos_chesteR/menu6/">Flexdashboard</a> <a class="sidebar-nav-item " href="/grupo_estudos_chesteR/menu7/">Listas, tabelas e apply</a> <a class="sidebar-nav-item active" href="/grupo_estudos_chesteR/menu8/">Operações por agrupamento</a> </nav> <p>&copy; Gabriel de Freitas Pereira.</p> </div> </div> <div class="content container"> <div class=franklin-content ><h1 id="chester_-_reunião_09"><a href="#chester_-_reunião_09" class=header-anchor >chesteR - reunião 09</a></h1> <h2 id="operações_por_agrupamentos"><a href="#operações_por_agrupamentos" class=header-anchor >Operações por agrupamentos</a></h2> <p>Abaixo está o <code>data.frame</code> que seguiremos utilizando &#40;nativo do R&#41;:</p> <pre><code class="R hljs"><span class=hljs-built_in >names</span><span class=hljs-punctuation >(</span>iris<span class=hljs-punctuation >)</span></code></pre>
+<p>&#91;1&#93; &quot;Sepal.Length&quot; &quot;Sepal.Width&quot; </p>
+<p>&#91;3&#93; &quot;Petal.Length&quot; &quot;Petal.Width&quot; </p>
+<p>&#91;5&#93; &quot;Species&quot;</p>
+<p>Como vimos no encontro anterior <code>tapply</code> pode realizar algumas operações por agrupamento. Exemplo:</p>
+<pre><code class="R hljs">tapply<span class=hljs-punctuation >(</span>X <span class=hljs-operator >=</span> iris<span class=hljs-operator >$</span>Petal.Width<span class=hljs-punctuation >,</span> INDEX <span class=hljs-operator >=</span> iris<span class=hljs-operator >$</span>Species<span class=hljs-punctuation >,</span> FUN <span class=hljs-operator >=</span> mean<span class=hljs-punctuation >)</span></code></pre>
+<p>setosa versicolor  virginica </p>
+<p>0.246 &nbsp;&nbsp;&nbsp;&nbsp;       1.326 &nbsp;&nbsp;&nbsp;&nbsp;       2.026 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
+<p>Outra forma de fazer isso seria recebendo o resultado em forma de tabela:</p>
+<pre><code class="R hljs">aggregate<span class=hljs-punctuation >(</span>Petal.Width <span class=hljs-operator >~</span> Species<span class=hljs-punctuation >,</span> data <span class=hljs-operator >=</span> iris<span class=hljs-punctuation >,</span> FUN <span class=hljs-operator >=</span> mean<span class=hljs-punctuation >)</span></code></pre>
+<p>&nbsp;&nbsp;&nbsp;&nbsp; Species &nbsp;&nbsp;&nbsp;&nbsp; Petal.Width</p>
+<p>1 &nbsp;&nbsp;&nbsp;&nbsp;   setosa &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      0.246</p>
+<p>2 &nbsp;&nbsp;&nbsp;&nbsp; versicolor &nbsp;&nbsp;&nbsp;&nbsp;       1.326</p>
+<p>3 &nbsp;&nbsp;&nbsp;&nbsp; virginica &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;       2.026</p>
+<p>A função <code>aggregate</code> é designada para trabalhar com várias colunas  e retornar um <code>data.frame</code> com uma linha para cada categoria,  enquanto a <code>tapply</code> é designada para ser usada com vetores &#40;uma única coluna&#41;  retornando uma matriz.</p>
+<p>Dentre essas funções, qual seria a opção mais rápida? </p>
+<p>Para descobrir, foi construída a seguinte função, com as especificações do passo a passo dentro dela:</p>
+<pre><code class="R hljs">clock <span class=hljs-operator >&lt;-</span> <span class=hljs-keyword >function</span><span class=hljs-punctuation >(</span>f<span class=hljs-punctuation >)</span> <span class=hljs-punctuation >{</span>
+  
+  <span class=hljs-comment ># registro do tempo inicial</span>
+  tic <span class=hljs-operator >&lt;-</span> Sys.time<span class=hljs-punctuation >(</span><span class=hljs-punctuation >)</span>
+  
+  <span class=hljs-comment ># função que iremos testar</span>
+  f
+  
+  <span class=hljs-comment ># registro do tempo final</span>
+  toc <span class=hljs-operator >&lt;-</span> Sys.time<span class=hljs-punctuation >(</span><span class=hljs-punctuation >)</span>
+  
+  <span class=hljs-comment ># tempo que a função gastou para rodar (tf-ti)</span>
+  time <span class=hljs-operator >&lt;-</span> toc <span class=hljs-operator >-</span> tic
+  
+  <span class=hljs-comment ># retornando o resultado da função e o tempo que ela levou, através de uma lista</span>
+  <span class=hljs-built_in >list</span><span class=hljs-punctuation >(</span>f<span class=hljs-punctuation >,</span> time<span class=hljs-punctuation >)</span>
+  
+<span class=hljs-punctuation >}</span></code></pre>
+<p>Aplicando a função nos 2 métodos:</p>
+<pre><code class="R hljs">clock<span class=hljs-punctuation >(</span>tapply<span class=hljs-punctuation >(</span>X <span class=hljs-operator >=</span> iris<span class=hljs-operator >$</span>Petal.Width<span class=hljs-punctuation >,</span> INDEX <span class=hljs-operator >=</span> iris<span class=hljs-operator >$</span>Species<span class=hljs-punctuation >,</span> FUN <span class=hljs-operator >=</span> mean<span class=hljs-punctuation >)</span><span class=hljs-punctuation >)</span></code></pre>
+<p>&#91;&#91;1&#93;&#93;</p>
+<p>setosa versicolor  virginica </p>
+<p>0.246 &nbsp;&nbsp;&nbsp;&nbsp;       1.326 &nbsp;&nbsp;&nbsp;&nbsp;       2.026 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
+<p>&#91;&#91;2&#93;&#93;</p>
+<p>Time difference of 0.0009338856 secs</p>
+<pre><code class="R hljs">clock<span class=hljs-punctuation >(</span>aggregate<span class=hljs-punctuation >(</span>Petal.Width <span class=hljs-operator >~</span> Species<span class=hljs-punctuation >,</span> data <span class=hljs-operator >=</span> iris<span class=hljs-punctuation >,</span> FUN <span class=hljs-operator >=</span> mean<span class=hljs-punctuation >)</span><span class=hljs-punctuation >)</span></code></pre>
+<p>&#91;&#91;1&#93;&#93;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp; Species &nbsp;&nbsp;&nbsp;&nbsp; Petal.Width</p>
+<p>1 &nbsp;&nbsp;&nbsp;&nbsp;   setosa &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      0.246</p>
+<p>2 &nbsp;&nbsp;&nbsp;&nbsp; versicolor &nbsp;&nbsp;&nbsp;&nbsp;       1.326</p>
+<p>3 &nbsp;&nbsp;&nbsp;&nbsp; virginica &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;       2.026</p>
+<p>&#91;&#91;2&#93;&#93;</p>
+<p>Time difference of 0.002429008 secs</p>
+<p>Logo, como foi visto acima, a função <code>tapply</code> é mais rápida&#33; Isso no geral irá ocorrer, ou seja, operações com vetores tendem a ser mais rápidas do que aquelas que envolvem tabelas.</p>
+<p>Obs.: Existem outras maneiras mais eficientes de se obter o exato tempo que leva cada função, mas essa é bastante clara e  aborda o tópico de funções que começamos a ver no último encontro.</p>
+<p>Outros usos da função aggregate, que explicitam suas vantagens:</p>
+<pre><code class="R hljs">aggregate<span class=hljs-punctuation >(</span>cbind<span class=hljs-punctuation >(</span>iris<span class=hljs-operator >$</span>Petal.Length<span class=hljs-punctuation >,</span> iris<span class=hljs-operator >$</span>Petal.Width<span class=hljs-punctuation >)</span><span class=hljs-punctuation >,</span> by <span class=hljs-operator >=</span> <span class=hljs-built_in >list</span><span class=hljs-punctuation >(</span>iris<span class=hljs-operator >$</span>Species<span class=hljs-punctuation >)</span><span class=hljs-punctuation >,</span> FUN <span class=hljs-operator >=</span> mean<span class=hljs-punctuation >)</span></code></pre>
+<p>&nbsp;&nbsp;&nbsp;&nbsp; Group.1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   V1 &nbsp;&nbsp;&nbsp;&nbsp; V2</p>
+<p>1 &nbsp;&nbsp;&nbsp;&nbsp; setosa &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1.462 0.246</p>
+<p>2 &nbsp;&nbsp;&nbsp;&nbsp; versicolor &nbsp;&nbsp;&nbsp;&nbsp;  4.260 1.326</p>
+<p>3 &nbsp;&nbsp;&nbsp;&nbsp; virginica &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  5.552 2.026</p>
+<p>Existe outra maneira de escrever o mesmo código de maneira simplificada, e o resultado será apresentado abaixo com uma pequena diferença, pois esse método já retorna o nome original das colunas &#40;o que facilita a compreensão do resultado&#41;:</p>
+<pre><code class="R hljs">aggregate<span class=hljs-punctuation >(</span>cbind<span class=hljs-punctuation >(</span>Petal.Length<span class=hljs-punctuation >,</span> Petal.Width<span class=hljs-punctuation >)</span> <span class=hljs-operator >~</span> Species<span class=hljs-punctuation >,</span> data <span class=hljs-operator >=</span> iris<span class=hljs-punctuation >,</span> FUN <span class=hljs-operator >=</span> mean<span class=hljs-punctuation >)</span></code></pre>
+<p>&nbsp;&nbsp;&nbsp;&nbsp; Species &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   Petal.Length &nbsp;&nbsp;&nbsp;&nbsp; Petal.Width</p>
+<p>1 &nbsp;&nbsp;&nbsp;&nbsp; setosa &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  1.462 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   0.246</p>
+<p>2 &nbsp;&nbsp;&nbsp;&nbsp; versicolor &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  4.260 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1.326</p>
+<p>3 &nbsp;&nbsp;&nbsp;&nbsp; virginica &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  5.552 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2.026</p>
+<p>Nas 2 funções acima nós combinamos as colunas através da função <code>cbind</code> gerando a média por espécies das variáveis especificadas &#40;<code>Petal.Length</code> e <code>Petal.Width</code>&#41;. Perceba que as funções se diferem no modo de chamar as variáveis. A primeira função exige que o agrupamento seja feito por lista através do argumento <code>by</code>. A segunda função utiliza o formato de fórmula que vimos no <a href="/grupo_estudos_chesteR/menu5/">sexto encontro</a>. </p>
+<p>Exemplo contando o número de vezes que ocorre cada espécie:</p>
+<pre><code class="R hljs">aggregate<span class=hljs-punctuation >(</span>iris<span class=hljs-operator >$</span>Species<span class=hljs-punctuation >,</span> by <span class=hljs-operator >=</span> <span class=hljs-built_in >list</span><span class=hljs-punctuation >(</span>iris<span class=hljs-operator >$</span>Species<span class=hljs-punctuation >)</span><span class=hljs-punctuation >,</span> FUN <span class=hljs-operator >=</span> <span class=hljs-built_in >length</span><span class=hljs-punctuation >)</span></code></pre>
+<p>&nbsp;&nbsp;&nbsp;&nbsp; Group.1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   x    </p>
+<p>1 &nbsp;&nbsp;&nbsp;&nbsp; setosa &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 50</p>
+<p>2 &nbsp;&nbsp;&nbsp;&nbsp; versicolor &nbsp;&nbsp;&nbsp;&nbsp;  50 </p>
+<p>3 &nbsp;&nbsp;&nbsp;&nbsp; virginica &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  50</p>
+<p>No entanto, a forma mais eficiente e fácil de se fazer isso seria através da função table:</p>
+<pre><code class="R hljs">table<span class=hljs-punctuation >(</span>iris<span class=hljs-operator >$</span>Species<span class=hljs-punctuation >)</span></code></pre>
+<p>setosa versicolor  virginica </p>
+<p>50 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      50 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;       50 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
+<p>Com isso, podemos analisar tabelas e vetores que possuem categorias de forma rápida e eficiente&#33;</p>
+<div class=page-foot >
+    <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> Gabriel de Freitas Pereira. Last modified: April 28, 2022.
+    Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
+</div>
+</div>
+    </div>
