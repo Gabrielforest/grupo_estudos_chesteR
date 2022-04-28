@@ -10,7 +10,7 @@ lista <- list(itens_limpeza = c("detergente", "amaciante", "sabão em pó"),
               itens_alimentacao =  c("alface", "soja", "pepino"),
               itens_farmacia = c("alfabisabolol", "predicim", "rivotril"))
 
-lista$itens_limpeza
+lista
 
 
 # tabelas -----------------------------------------------------------------
@@ -55,7 +55,7 @@ oi <- function(nome) {paste0("oi ", nome)}
 oi(nome = "Gabriel")
 
 # usando função personalizada no lapply
-lapply(X = dados_plantas, FUN = function(x) {x + 1})
+lapply(X = dados_plantas, FUN = function(x) {mean(x) + 1})
 
 
 ## sapply - retorna um vetor ou matriz
