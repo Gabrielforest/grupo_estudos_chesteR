@@ -1,0 +1,70 @@
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/grupo_estudos_chesteR/libs/highlight/github.min.css"> <link rel=stylesheet  href="/grupo_estudos_chesteR/css/franklin.css"> <link rel=stylesheet  href="/grupo_estudos_chesteR/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/grupo_estudos_chesteR/assets/favicon.png"> <title>chesteR - reunião 07</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h1><a href="/grupo_estudos_chesteR/">chesteR</a></h1> <p class=lead >R e Rstudio</p> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/grupo_estudos_chesteR/">Home</a> <a class="sidebar-nav-item " href="/grupo_estudos_chesteR/menu1/">Operações</a> <a class="sidebar-nav-item " href="/grupo_estudos_chesteR/menu2/">Variáveis</a> <a class="sidebar-nav-item " href="/grupo_estudos_chesteR/menu3/">Pacote ggplot2</a> <a class="sidebar-nav-item " href="/grupo_estudos_chesteR/menu4/">Pacote esquisse</a> <a class="sidebar-nav-item " href="/grupo_estudos_chesteR/menu5/">Regressão linear</a> <a class="sidebar-nav-item active" href="/grupo_estudos_chesteR/menu6/">Flexdashboard</a> </nav> <p>&copy; Gabriel de Freitas Pereira.</p> </div> </div> <div class="content container"> <div class=franklin-content ><h1 id="chester_-_reunião_07"><a href="#chester_-_reunião_07" class=header-anchor >chesteR - reunião 07</a></h1> <h2 id=flexdashboard ><a href="#flexdashboard" class=header-anchor >Flexdashboard</a></h2> <p><code>flexdashboard</code> é um pacote que nos permite criar simples dashboards através de um documento organizado em Rmarkdown. Sendo assim, uma alternativa de criação de documentos estáticos minimamente &quot;interativos&quot; com o usuário.</p> <p>Para gerar esse tipo de painel é necessário instalar o pacote <code>flexdashboard</code>:</p> <pre><code class="R hljs">install.packages<span class=hljs-punctuation >(</span><span class=hljs-string >&quot;flexdashboard&quot;</span><span class=hljs-punctuation >)</span></code></pre>
+<p>E então gerar um arquivo Rmarkdown &#40;como vimos anteriormente&#41;, alterando o template inicial, como demonstrado na imagem abaixo:</p>
+<p><img src="/grupo_estudos_chesteR/assets/template.png" alt="" /></p>
+<p>A partir desse documento padrão gerado, nós alteramos as informações iniciais de:</p>
+<pre><code class="yaml hljs"><span class=hljs-meta >---</span>
+<span class=hljs-attr >title:</span> <span class=hljs-string >&quot;Untitled&quot;</span>
+<span class=hljs-attr >output:</span> 
+  <span class=hljs-attr >flexdashboard::flex_dashboard:</span>
+    <span class=hljs-attr >orientation:</span> <span class=hljs-string >columns</span>
+    <span class=hljs-attr >vertical_layout:</span> <span class=hljs-string >fill</span>
+<span class=hljs-meta >---</span></code></pre>
+<p>Para:</p>
+<pre><code class="yaml hljs"><span class=hljs-meta >---</span>
+<span class=hljs-attr >title:</span> <span class=hljs-string >&quot;encontro 07&quot;</span>
+<span class=hljs-attr >author:</span> <span class=hljs-string >&quot;Grupo de Estudos - chesteR&quot;</span>
+<span class=hljs-attr >date:</span> <span class=hljs-string >&quot;16/03/2022&quot;</span>
+<span class=hljs-attr >output:</span> 
+  <span class=hljs-attr >flexdashboard::flex_dashboard:</span>
+    <span class=hljs-attr >orientation:</span> <span class=hljs-string >columns</span>
+    <span class=hljs-attr >vertical_layout:</span> <span class=hljs-string >fill</span>
+  <span class=hljs-attr >theme:</span> <span class=hljs-string >yeti</span>
+<span class=hljs-meta >---</span></code></pre>
+<p>Isto foi feito com o intuito de deixar mais claro informações como o título, o autor, a data e o tema. </p>
+<p>Obs.: os temas disponíveis são: default, cerulean, journal, flatly, darkly, readable, spacelab, united, cosmo, lumen, paper, sandstone, simplex e yeti &#40;o qual foi selecionado&#41;.</p>
+<h2 id=carregando_pacotes ><a href="#carregando_pacotes" class=header-anchor >Carregando Pacotes</a></h2>
+<p>Como estudado durante o nosso <a href="/grupo_estudos_chesteR/menu4/">quarto encontro</a>, no primeiro bloco de código do Rmarkdown são definidos os arquivos e as variáveis que serão utilizadas durante todo o documento, e que não aparecerão no layout do nosso html. Isso se deve as especificações no início do nosso bloco de código <code>r setup, include&#61;FALSE</code>, que já vieram definidas na criação do nosso flexdashboard. </p>
+<p>A partir disso, nós instalamos os pacotes que serão usados e os carregamos para utilização. Além disso, nós construímos nosso modelo linear com base no que foi alcançado durante o nosso <a href="/grupo_estudos_chesteR/menu5/">último encontro</a>.</p>
+<p>Obs.: o modelo será utilizado apenas para visualização gráfica como exemplificação, no entanto, mais detalhes sobre o mesmo pode ser encontrado no encontro anterior mencionado acima.</p>
+<pre><code class="R hljs">```{r setup, include=FALSE}
+pacotes &lt;- c(&quot;flexdashboard&quot;, &quot;ISLR&quot;, &quot;car&quot;, &quot;olsrr&quot;)
+
+install_library &lt;- lapply(pacotes,
+FUN = function(x) {if (!require(x, character.only = TRUE)) {
+      install.packages(x, dependencies = TRUE)
+      library(x, character.only = TRUE)
+    }
+  }
+)
+
+dados_venda &lt;- Carseats
+
+fit1 &lt;- lm(formula = Sales ~ CompPrice + Income + Advertising + Price + ShelveLoc + Age + Income:Advertising, data = dados_venda)
+´´´</code></pre>
+<p>A partir daí o nosso documento por padrão já apresentava o seguinte escopo:</p>
+<p><img src="/grupo_estudos_chesteR/assets/flex.png" alt="" /></p>
+<p>Para termos uma ideia melhor do que está acontecendo a partir disso, podemos renderizar o documento usando <code>ctrl &#43; shift &#43; k</code>, e aparecerá na tela como está o resultado inicial do código &#40;apresentado abaixo&#41;:</p>
+<p><img src="/grupo_estudos_chesteR/assets/renderized_flex.png" alt="" /></p>
+<p>Como é possível observar nessa imagem, mais da metade da tela é representada pelo bloco <code>Chart A</code>. O qual é pertencente a coluna definida como 650 no código presente na linha 13 da imagem anterior <code>Column &#123;data-width&#61;650&#125;</code>.</p>
+<p>Já os blocos <code>Chart B</code> e <code>Chart C</code> estão contidos dentro da especificação presente na linha 22 <code>Column &#123;data-width&#61;350&#125;</code>. </p>
+<p>Nesse momento, como você já pôde imaginar, a somatória das colunas é igual a 1000, sendo assim para dividir a tela ao meio basta alterar o número do tamanho das colunas para 500. Ademais, também é notável que o título está sendo representado logo abaixo da especificação de sua coluna, sendo possível inserir mais de um bloco dentro de uma coluna. E apesar dos blocos de código <code>&#123;r&#125;</code> estarem vazios, dentro deles podemos colocar códigos para serem dispostos dentro do seu respectivo bloco, assim como fizemos no nosso <a href="/grupo_estudos_chesteR/menu4/">quarto encontro</a>. </p>
+<p>A partir daí alteramos o código chegando em:</p>
+<p><img src="/grupo_estudos_chesteR/assets/final_flex_code.png" alt="" /></p>
+<p>sendo as novidades desse painel: a inserção de abas; uma imagem da Bahia baixada na internet que foi salva na mesma pasta que se encontra o script; os novos títulos e o gráfico do nosso modelo indicado lá no primeiro bloco de código plotado.</p>
+<p><img src="/grupo_estudos_chesteR/assets/renderized_final_flex.png" alt="" /></p>
+<p>Observações:</p>
+<ul>
+<li><p>para criarmos abas é necessário usar o comando <code>&#61;&#61;&#61;</code> como especificado nas linhas 26 e 55 do código, com o título da aba vindo logo acima disso;</p>
+
+<li><p>na linha 33 a especificação <code>echo&#61;FALSE</code> indica que o comando escrito na linha 34 não deve aparecer no painel, apenas seu resultado. Ainda na linha 33, o comando <code>out.width&#61;&quot;80&#37;&quot;</code> indica o tamanho da figura e o comando <code>fig.cap&#61;&quot;BAHIA, RECEBA&#33;&quot;</code> a legenda da mesma. </p>
+
+<li><p>o comando <code>echo&#61;TRUE</code> na linha 39 indica que a conta que gera o resultado <code>2</code> deve ser demonstrada no painel.</p>
+
+</ul>
+<p>O código completo do <code>flexdashboard</code> pode ser acessado no seguinte <a href="https://github.com/Gabrielforest/grupo_estudos_chesteR/blob/main/reuni&#37;C3&#37;B5es/encontro_07_flexdashboard.html">link</a></p>
+<div class=page-foot >
+    <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> Gabriel de Freitas Pereira. Last modified: April 28, 2022.
+    Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
+</div>
+</div>
+    </div>
