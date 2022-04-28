@@ -16,5 +16,7 @@ Nessa página serão postados documentos referentes aos scripts de cada reunião
 
 -   [Regressão Linear](/menu5/)
 
+-   [Flexdashboard](/menu6/)
+
 
  Obs.: os materiais postados aqui requerem a instalação do [R](https://cran.r-project.org/) e [Rstudio](https://www.rstudio.com/products/rstudio/download/#download).
