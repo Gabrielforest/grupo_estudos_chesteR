@@ -18,5 +18,7 @@ Nessa página serão postados documentos referentes aos scripts de cada reunião
 
 -   [Flexdashboard](/menu6/)
 
+-   [Listas, Tabelas e Funções apply](/menu7/)
 
- Obs.: os materiais postados aqui requerem a instalação do [R](https://cran.r-project.org/) e [Rstudio](https://www.rstudio.com/products/rstudio/download/#download).
+
+ Observações: os materiais postados aqui requerem a instalação do [R](https://cran.r-project.org/) e [Rstudio](https://www.rstudio.com/products/rstudio/download/#download); e as reuniões feitas pelo grupo que visam revisar conteúdo não serão postadas aqui (pois essas revisões serão feitas a partir das postagens neste site).
