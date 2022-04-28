@@ -1,0 +1,128 @@
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/grupo_estudos_chesteR/libs/highlight/github.min.css"> <link rel=stylesheet  href="/grupo_estudos_chesteR/css/franklin.css"> <link rel=stylesheet  href="/grupo_estudos_chesteR/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/grupo_estudos_chesteR/assets/favicon.png"> <title>chesteR - reunião 08</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h1><a href="/grupo_estudos_chesteR/">chesteR</a></h1> <p class=lead >R e Rstudio</p> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/grupo_estudos_chesteR/">Home</a> <a class="sidebar-nav-item " href="/grupo_estudos_chesteR/menu1/">Operações</a> <a class="sidebar-nav-item " href="/grupo_estudos_chesteR/menu2/">Variáveis</a> <a class="sidebar-nav-item " href="/grupo_estudos_chesteR/menu3/">Pacote ggplot2</a> <a class="sidebar-nav-item " href="/grupo_estudos_chesteR/menu4/">Pacote esquisse</a> <a class="sidebar-nav-item " href="/grupo_estudos_chesteR/menu5/">Regressão linear</a> <a class="sidebar-nav-item " href="/grupo_estudos_chesteR/menu6/">Flexdashboard</a> <a class="sidebar-nav-item " href="/grupo_estudos_chesteR/menu7/">Listas, tabelas e apply</a> </nav> <p>&copy; Gabriel de Freitas Pereira.</p> </div> </div> <div class="content container"> <div class=franklin-content ><h1 id="chester_-_reunião_08"><a href="#chester_-_reunião_08" class=header-anchor >chesteR - reunião 08</a></h1> <h2 id="listas_tabelas_e_funções_apply"><a href="#listas_tabelas_e_funções_apply" class=header-anchor >Listas, tabelas e funções apply</a></h2> <h2 id=listas ><a href="#listas" class=header-anchor >Listas </a></h2> <p>As listas são um tipo de classe existente no R. O qual permite organizarmos os dados da seguinte maneira:</p> <pre><code class="R hljs">lista <span class=hljs-operator >&lt;-</span> <span class=hljs-built_in >list</span><span class=hljs-punctuation >(</span>itens_limpeza <span class=hljs-operator >=</span> <span class=hljs-built_in >c</span><span class=hljs-punctuation >(</span><span class=hljs-string >&quot;detergente&quot;</span><span class=hljs-punctuation >,</span> <span class=hljs-string >&quot;amaciante&quot;</span><span class=hljs-punctuation >,</span> <span class=hljs-string >&quot;sabão em pó&quot;</span><span class=hljs-punctuation >)</span><span class=hljs-punctuation >,</span>
+              itens_alimentacao <span class=hljs-operator >=</span>  <span class=hljs-built_in >c</span><span class=hljs-punctuation >(</span><span class=hljs-string >&quot;alface&quot;</span><span class=hljs-punctuation >,</span> <span class=hljs-string >&quot;soja&quot;</span><span class=hljs-punctuation >,</span> <span class=hljs-string >&quot;pepino&quot;</span><span class=hljs-punctuation >)</span><span class=hljs-punctuation >,</span>
+              itens_farmacia <span class=hljs-operator >=</span> <span class=hljs-built_in >c</span><span class=hljs-punctuation >(</span><span class=hljs-string >&quot;alfabisabolol&quot;</span><span class=hljs-punctuation >,</span> <span class=hljs-string >&quot;predicim&quot;</span><span class=hljs-punctuation >,</span> <span class=hljs-string >&quot;rivotril&quot;</span><span class=hljs-punctuation >)</span><span class=hljs-punctuation >)</span>
+
+lista</code></pre> <p>&#36;itens_limpeza</p> <p>&#91;1&#93; &quot;detergente&quot; &quot;amaciante&quot; &quot;sabão em pó&quot;</p> <p>&#36;itens_alimentacao</p> <p>&#91;1&#93; &quot;alface&quot; &quot;soja&quot; &quot;pepino&quot;</p> <p>&#36;itens_farmacia</p> <p>&#91;1&#93; &quot;alfabisabolol&quot; &quot;predicim&quot; &quot;rivotril&quot; </p> <h2 id=tabelas ><a href="#tabelas" class=header-anchor >Tabelas </a></h2> <p>As tabelas são um outro tipo de classe existente no R. Essa classe é denominada de <code>data.frame</code>. Um exemplo foi construído abaixo:</p> <pre><code class="R hljs">tabela <span class=hljs-operator >&lt;-</span> data.frame<span class=hljs-punctuation >(</span>itens_limpeza <span class=hljs-operator >=</span> <span class=hljs-built_in >c</span><span class=hljs-punctuation >(</span><span class=hljs-string >&quot;detergente&quot;</span><span class=hljs-punctuation >,</span> <span class=hljs-string >&quot;amaciante&quot;</span><span class=hljs-punctuation >,</span> <span class=hljs-string >&quot;sabão em pó&quot;</span><span class=hljs-punctuation >)</span><span class=hljs-punctuation >,</span>
+                     itens_alimentacao <span class=hljs-operator >=</span>  <span class=hljs-built_in >c</span><span class=hljs-punctuation >(</span><span class=hljs-string >&quot;alface&quot;</span><span class=hljs-punctuation >,</span> <span class=hljs-string >&quot;soja&quot;</span><span class=hljs-punctuation >,</span> <span class=hljs-string >&quot;pepino&quot;</span><span class=hljs-punctuation >)</span><span class=hljs-punctuation >,</span>
+                     itens_farmacia <span class=hljs-operator >=</span> <span class=hljs-built_in >c</span><span class=hljs-punctuation >(</span><span class=hljs-string >&quot;alfabisabolol&quot;</span><span class=hljs-punctuation >,</span> <span class=hljs-string >&quot;predicim&quot;</span><span class=hljs-punctuation >,</span> <span class=hljs-string >&quot;rivotril&quot;</span><span class=hljs-punctuation >)</span><span class=hljs-punctuation >)</span>
+View<span class=hljs-punctuation >(</span>tabela<span class=hljs-punctuation >)</span></code></pre> <p><img src="/grupo_estudos_chesteR/assets/market_dataframe.png" alt="" /></p> <p>Obs.: Esses tópicos são continuamente abordados durante os encontros, e considerações serão feitas com o surgimento de novos manejos necessários...</p> <p>A partir disso, como comentado em outros encontros, o R possui tabelas nativamente disponíveis. E para visualizar quais são elas, utilizamos o seguinte comando:</p> <pre><code class="R hljs">data<span class=hljs-punctuation >(</span><span class=hljs-punctuation >)</span></code></pre>
+<p><img src="/grupo_estudos_chesteR/assets/dataset_base_r.png" alt="" /></p>
+<p>Sendo assim, iremos utilizar 1 dessas tabelas, que é a <code>iris</code>, bastante comum na comunidade R.  Essa tabela &#40;data.frame&#41; apresenta dados referentes a 3 espécies de plantas e algumas de suas características. Portanto, visando facilitar o entendimento, atribuí um novo nome para essa tabela:</p>
+<pre><code class="R hljs">dados_plantas <span class=hljs-operator >&lt;-</span> iris
+<span class=hljs-built_in >class</span><span class=hljs-punctuation >(</span>dados_plantas<span class=hljs-punctuation >)</span></code></pre>
+<p>&#91;1&#93; &quot;data.frame&quot;</p>
+<p>Visualizando esse data.frame:</p>
+<pre><code class="R hljs">View<span class=hljs-punctuation >(</span>dados_plantas<span class=hljs-punctuation >)</span></code></pre>
+<p><img src="/grupo_estudos_chesteR/assets/view_iris.png" alt="" /></p>
+<h2 id="família_de_funções_apply"><a href="#família_de_funções_apply" class=header-anchor >Família de funções apply </a></h2>
+<p><code>apply</code> - retorna um vetor, através de um método que foge dos loops convencionais em programação, os quais serão discutidos futuramente... </p>
+<p>Através dessa função é possível obtermos a média por colunas dos dados que estamos investigando, de forma rápida e simples:</p>
+<pre><code class="R hljs">apply<span class=hljs-punctuation >(</span>X <span class=hljs-operator >=</span> dados_plantas<span class=hljs-punctuation >[</span><span class=hljs-punctuation >,</span><span class=hljs-number >1</span><span class=hljs-operator >:</span><span class=hljs-number >4</span><span class=hljs-punctuation >]</span><span class=hljs-punctuation >,</span> MARGIN <span class=hljs-operator >=</span> <span class=hljs-number >2</span><span class=hljs-punctuation >,</span> FUN <span class=hljs-operator >=</span> mean<span class=hljs-punctuation >)</span></code></pre>
+<p>Sepal.Length  Sepal.Width  Petal.Length  Petal.Width </p>
+<p>5.843333 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3.057333 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3.758000 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1.199333</p>
+<p>O primeiro argumento da função <code>X</code> determina quais dados serão usados, nesse caso  selecionamos apenas as colunas numéricas dos dados das plantas para fazermos a média, as colunas numéricas vão de 1 até 4 como foi possível observar acima através da visualização do nosso data.frame. Por isso <code>dados_plantas&#91;,1:4&#93;</code> seleciona todas as linhas da tabela &#40;especificação antes da vírgula&#41; e as colunas de 1 até 4 &#40;especificação depois da vírgula&#41;. Já o segundo argumento da função <code>MARGIN</code> pode ser igual a 2 quando queremos fazer a conta por colunas, ou 1 quando queremos fazer a operação por linhas. E por final o argumento <code>FUN</code> representa a função que será usada &#40;nesse caso a função <code>mean</code>&#41;.</p>
+<p>Exemplo da média por linhas:</p>
+<pre><code class="R hljs">apply<span class=hljs-punctuation >(</span>X <span class=hljs-operator >=</span> dados_plantas<span class=hljs-punctuation >[</span><span class=hljs-punctuation >,</span><span class=hljs-number >1</span><span class=hljs-operator >:</span><span class=hljs-number >4</span><span class=hljs-punctuation >]</span><span class=hljs-punctuation >,</span> MARGIN <span class=hljs-operator >=</span> <span class=hljs-number >1</span><span class=hljs-punctuation >,</span> FUN <span class=hljs-operator >=</span> mean<span class=hljs-punctuation >)</span></code></pre>
+<p>&#91;1&#93; 2.550 2.375 2.350 2.350 2.550 2.850 2.425 2.525 2.225 2.400 2.700 2.500  </p>
+<p>&#91;13&#93; 2.325 2.125 2.800 3.000 2.750 2.575 2.875 2.675 2.675 2.675 2.350 2.650 </p>
+<p>&#91;25&#93; 2.575 2.450 2.600 2.600 2.550 2.425 2.425 2.675 2.725 2.825 2.425 2.400  </p>
+<p>&#91;37&#93; 2.625 2.500 2.225 2.550 2.525 2.100 2.275 2.675 2.800 2.375 2.675 2.350  </p>
+<p>&#91;49&#93; 2.675 2.475 4.075 3.900 4.100 3.275 3.850 3.575 3.975 2.900 3.850 3.300  </p>
+<p>&#91;61&#93; 2.875 3.650 3.300 3.775 3.350 3.900 3.650 3.400 3.600 3.275 3.925 3.550  </p>
+<p>&#91;73&#93; 3.800 3.700 3.725 3.850 3.950 4.100 3.725 3.200 3.200 3.150 3.400 3.850  </p>
+<p>&#91;85&#93; 3.600 3.875 4.000 3.575 3.500 3.325 3.425 3.775 3.400 2.900 3.450 3.525  </p>
+<p>&#91;97&#93; 3.525 3.675 2.925 3.475 4.525 3.875 4.525 4.150 4.375 4.825 3.400 4.575  </p>
+<p>&#91;109&#93; 4.200 4.850 4.200 4.075 4.350 3.800 4.025 4.300 4.200 5.100 4.875 3.675  </p>
+<p>&#91;121&#93; 4.525 3.825 4.800 3.925 4.450 4.550 3.900 3.950 4.225 4.400 4.550 5.025  </p>
+<p>&#91;133&#93; 4.250 3.925 3.925 4.775 4.425 4.200 3.900 4.375 4.450 4.350 3.875 4.550  </p>
+<p>&#91;145&#93; 4.550 4.300 3.925 4.175 4.325 3.950  </p>
+<p>Como a tabela possui 150 linhas, esse comando retornou um vetor com 150 resultados.</p>
+<p><code>lapply</code> - semelhante ao <code>apply</code>, no entanto retorna o resultado organizado em lista ao invés de vetor. Exemplo:</p>
+<pre><code class="R hljs">lapply<span class=hljs-punctuation >(</span>X <span class=hljs-operator >=</span> dados_plantas<span class=hljs-punctuation >,</span> FUN <span class=hljs-operator >=</span> <span class=hljs-built_in >class</span><span class=hljs-punctuation >)</span></code></pre>
+<p>&#36;Sepal.Length</p>
+<p>&#91;1&#93; &quot;numeric&quot;</p>
+<p>&#36;Sepal.Width</p>
+<p>&#91;1&#93; &quot;numeric&quot;</p>
+<p>&#36;Petal.Length</p>
+<p>&#91;1&#93; &quot;numeric&quot;</p>
+<p>&#36;Petal.Width</p>
+<p>&#91;1&#93; &quot;numeric&quot;</p>
+<p>&#36;Species</p>
+<p>&#91;1&#93; &quot;factor&quot;</p>
+<p>Também é possível a criação de funções personalizadas com o intuito de aplicá-las  dentro das funções da família <code>apply</code>. Veja a seguir exemplos de funções básicas: </p>
+<pre><code class="R hljs">somatoria <span class=hljs-operator >&lt;-</span> <span class=hljs-keyword >function</span><span class=hljs-punctuation >(</span>x <span class=hljs-punctuation >,</span> y<span class=hljs-punctuation >)</span> <span class=hljs-punctuation >{</span>x <span class=hljs-operator >+</span> y<span class=hljs-punctuation >}</span>
+somatoria<span class=hljs-punctuation >(</span>x <span class=hljs-operator >=</span> <span class=hljs-number >1</span><span class=hljs-punctuation >,</span> y <span class=hljs-operator >=</span> <span class=hljs-number >2</span><span class=hljs-punctuation >)</span></code></pre>
+<p>&#91;1&#93; 3</p>
+<p>Como foi observado acima, a sintaxe das funções no R seguem o seguinte padrão: <code>function&#40;&#41; &#123;&#125;</code>. Desse modo, o que é inserido entre parênteses representa os argumentos que o usuário irá inserir, e entre chaves o escopo que a função irá executar. Logo, a função <code>somatoria</code> criada requere 2 números que serão somados, equivalente a forma simplificada da função <code>sum</code> já existente no R.</p>
+<p>Outro exemplo de função:</p>
+<pre><code class="R hljs">oi <span class=hljs-operator >&lt;-</span> <span class=hljs-keyword >function</span><span class=hljs-punctuation >(</span>nome<span class=hljs-punctuation >)</span> <span class=hljs-punctuation >{</span>paste0<span class=hljs-punctuation >(</span><span class=hljs-string >&quot;oi &quot;</span><span class=hljs-punctuation >,</span> nome<span class=hljs-punctuation >)</span><span class=hljs-punctuation >}</span>
+oi<span class=hljs-punctuation >(</span>nome <span class=hljs-operator >=</span> <span class=hljs-string >&quot;Gabriel&quot;</span><span class=hljs-punctuation >)</span></code></pre>
+<p>&#91;1&#93; &quot;oi Gabriel&quot;</p>
+<p>A função <code>oi</code> criada acima usa a função <code>paste0</code> para colar a mensagem &quot;oi &quot; com o nome que o usuário irá inserir.</p>
+<p>Usando função personalizada com lapply:</p>
+<pre><code class="R hljs">lapply<span class=hljs-punctuation >(</span>X <span class=hljs-operator >=</span> dados_plantas<span class=hljs-punctuation >,</span> FUN <span class=hljs-operator >=</span> <span class=hljs-keyword >function</span><span class=hljs-punctuation >(</span>x<span class=hljs-punctuation >)</span> <span class=hljs-punctuation >{</span>mean<span class=hljs-punctuation >(</span>x<span class=hljs-punctuation >)</span> <span class=hljs-operator >+</span> <span class=hljs-number >1</span><span class=hljs-punctuation >}</span><span class=hljs-punctuation >)</span></code></pre>
+<p>&#36;Sepal.Length</p>
+<p>&#91;1&#93; 6.843333</p>
+<p>&#36;Sepal.Width</p>
+<p>&#91;1&#93; 4.057333</p>
+<p>&#36;Petal.Length</p>
+<p>&#91;1&#93; 4.758</p>
+<p>&#36;Petal.Width</p>
+<p>&#91;1&#93; 2.199333</p>
+<p>&#36;Species</p>
+<p>&#91;1&#93; NA</p>
+<p>Warning message: In mean.default&#40;x&#41; : argumento não é numérico nem lógico: retornando NA</p>
+<p>A função acima soma 1 para a média de cada coluna da nossa tabela, e como a espécie é um fator é retornado um aviso do porquê não foi realizado a operação nessa coluna.</p>
+<p><code>sapply</code> - retorna um vetor ou matriz, simplificando o resultado do <code>lapply</code>. Exemplos:</p>
+<pre><code class="R hljs">sapply<span class=hljs-punctuation >(</span>X <span class=hljs-operator >=</span> dados_plantas<span class=hljs-punctuation >,</span> FUN <span class=hljs-operator >=</span> <span class=hljs-built_in >class</span><span class=hljs-punctuation >)</span></code></pre>
+<p>Sepal.Length  Sepal.Width Petal.Length  Petal.Width      Species </p>
+<p>&quot;numeric&quot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    &quot;numeric&quot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     &quot;numeric&quot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     &quot;numeric&quot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      &quot;factor&quot;</p>
+<pre><code class="R hljs">sapply<span class=hljs-punctuation >(</span>X <span class=hljs-operator >=</span> dados_plantas<span class=hljs-punctuation >,</span> FUN <span class=hljs-operator >=</span> levels<span class=hljs-punctuation >)</span></code></pre>
+<p>&#36;Sepal.Length</p>
+<p>NULL</p>
+<p>&#36;Sepal.Width</p>
+<p>NULL</p>
+<p>&#36;Petal.Length</p>
+<p>NULL</p>
+<p>&#36;Petal.Width</p>
+<p>NULL</p>
+<p>&#36;Species</p>
+<p>&#91;1&#93; &quot;setosa&quot;     &quot;versicolor&quot; &quot;virginica&quot; </p>
+<p>Na função acima, utilizamos <code>levels</code> para indicar quais são as categorias de cada variável &#40;coluna&#41;. E como foi observado, apenas a coluna de espécies apresentou resultados, por ser a única coluna categórica.  </p>
+<p><code>mapply</code> - é uma versão multivariada do apply, com ela podemos usar múltiplos argumentos. Exemplos: </p>
+<pre><code class="R hljs">mapply<span class=hljs-punctuation >(</span>FUN <span class=hljs-operator >=</span> somatoria<span class=hljs-punctuation >,</span> x <span class=hljs-operator >=</span> dados_plantas<span class=hljs-operator >$</span>Sepal.Length<span class=hljs-punctuation >,</span> y <span class=hljs-operator >=</span> dados_plantas<span class=hljs-operator >$</span>Sepal.Width<span class=hljs-punctuation >)</span></code></pre>
+<p>&#91;1&#93;  8.6  7.9  7.9  7.7  8.6  9.3  8.0  8.4  7.3  8.0  9.1  8.2  7.8  7.3</p>
+<p>&#91;15&#93;  9.8 10.1  9.3  8.6  9.5  8.9  8.8  8.8  8.2  8.4  8.2  8.0  8.4  8.7</p>
+<p>&#91;29&#93;  8.6  7.9  7.9  8.8  9.3  9.7  8.0  8.2  9.0  8.5  7.4  8.5  8.5  6.8</p>
+<p>&#91;43&#93;  7.6  8.5  8.9  7.8  8.9  7.8  9.0  8.3 10.2  9.6 10.0  7.8  9.3  8.5</p>
+<p>&#91;57&#93;  9.6  7.3  9.5  7.9  7.0  8.9  8.2  9.0  8.5  9.8  8.6  8.5  8.4  8.1</p>
+<p>&#91;71&#93;  9.1  8.9  8.8  8.9  9.3  9.6  9.6  9.7  8.9  8.3  7.9  7.9  8.5  8.7</p>
+<p>&#91;85&#93;  8.4  9.4  9.8  8.6  8.6  8.0  8.1  9.1  8.4  7.3  8.3  8.7  8.6  9.1</p>
+<p>&#91;99&#93;  7.6  8.5  9.6  8.5 10.1  9.2  9.5 10.6  7.4 10.2  9.2 10.8  9.7  9.1</p>
+<p>&#91;113&#93;  9.8  8.2  8.6  9.6  9.5 11.5 10.3  8.2 10.1  8.4 10.5  9.0 10.0 10.4</p>
+<p>&#91;127&#93;  9.0  9.1  9.2 10.2 10.2 11.7  9.2  9.1  8.7 10.7  9.7  9.5  9.0 10.0</p>
+<p>&#91;141&#93;  9.8 10.0  8.5 10.0 10.0  9.7  8.8  9.5  9.6  8.9</p>
+<p>Através da função acima, foi possível aplicar a função que criamos <code>somatoria</code> para somar 2 colunas por cada linha&#33;</p>
+<p><code>tapply</code> - aplica uma função para um grupo nivelado, com isso é possível obter resultados por agrupamentos, os quais serão mais discutidos no próximo encontro. Exemplo:</p>
+<pre><code class="R hljs">tapply<span class=hljs-punctuation >(</span>X <span class=hljs-operator >=</span> dados_plantas<span class=hljs-operator >$</span>Sepal.Length<span class=hljs-punctuation >,</span> INDEX <span class=hljs-operator >=</span> dados_plantas<span class=hljs-operator >$</span>Species<span class=hljs-punctuation >,</span> FUN <span class=hljs-operator >=</span> <span class=hljs-built_in >min</span><span class=hljs-punctuation >)</span></code></pre>
+<p>setosa versicolor  virginica </p>
+<p>4.3 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;       4.9 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;       4.9 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
+<h2 id=resumindo ><a href="#resumindo" class=header-anchor >Resumindo:</a></h2>
+<ul>
+<li><p>apply: Aplicar função nas margens de um array.</p>
+
+<li><p>lapply: Faz um loop em uma lista e avalia uma função em cada elemento.</p>
+
+<li><p>sapply: O mesmo que lapply, mas tenta simplificar o resultado.</p>
+
+<li><p>mapply: versão multivariada do lapply &#40;isto é, aceita mais de um argumento&#41;.</p>
+
+<li><p>tapply: aplicar uma função sobre subconjuntos de um vetor.</p>
+
+</ul>
+<div class=page-foot >
+    <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> Gabriel de Freitas Pereira. Last modified: April 28, 2022.
+    Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
+</div>
+</div>
+    </div>
