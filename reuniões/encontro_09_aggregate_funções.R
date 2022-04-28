@@ -35,7 +35,7 @@ clock <- function(f) {
   toc <- Sys.time()
   
   # tempo que a função gastou para rodar
-  time <- tic - toc
+  time <- toc - tic
   
   # retornando o resultado da função e o tempo que ela levou
   list(f, time)
