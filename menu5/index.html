@@ -54,29 +54,19 @@ plot<span class=hljs-punctuation >(</span>fit1<span class=hljs-punctuation >)</s
 <p>Aqui, por simplicidade, seguiremos utilizando apenas os gráficos gerados pela função <code>plot&#40;&#41;</code> para fazermos as interpretações.</p>
 <h2 id="interpretação_dos_gráficos"><a href="#interpretação_dos_gráficos" class=header-anchor >Interpretação dos gráficos:</a></h2>
 <ul>
-<li><p>Residuals x Fitted values: demonstra se os resíduos têm padrões não lineares, </p>
+<li><p>Residuals x Fitted values: demonstra se os resíduos têm padrões não lineares, nesse caso a linha vermelha indica um padrão linear.</p>
+
+<li><p>Normal Q-Q: demonstra se os resíduos têm distribuição normal, nesse caso os resíduos seguem a distribuição normal &#40;linha pontilhada&#41;.  </p>
+
+<li><p>Scale Location: demonstra se os resíduos são distribuídos ao redor dos preditores, esse gráfico representa a homocedastecidade &#40;resíduos igualmente distribuídos&#41; de forma clara.</p>
+
+<li><p>Residuals x Leverage: pontos fora dessa distância, alcançando o extremo superior direito ou inferior direito com linhas pontilhadas vermelhas nessas posições indicam não linearidade ou a presença de outliers. Nesse caso isso não acontece.</p>
 
 </ul>
-<p>nesse caso a linha vermelha indica um padrão linear.</p>
-<ul>
-<li><p>Normal Q-Q: demonstra se os resíduos têm distribuição normal, nesse caso</p>
-
-</ul>
-<p>os resíduos seguem a distribuição normal &#40;linha pontilhada&#41;.  </p>
-<ul>
-<li><p>Scale Location: demonstra se os resíduos são distribuídos ao redor dos preditores,</p>
-
-</ul>
-<p>esse gráfico representa a homocedastecidade &#40;resíduos igualmente distribuídos&#41; de forma clara.</p>
-<ul>
-<li><p>Residuals x Leverage: pontos fora dessa distância, alcançando o extremo superior direito</p>
-
-</ul>
-<p>ou inferior direito com linhas pontilhadas vermelhas nessa posições indicam não linearidade ou a presença de outliers. Nesse caso isso não acontece.</p>
 <p>Além da análise gráfica, a qual pode não ser conclusiva, é possível testar numericamente as premissas da regressão linear. Com isso temos o teste de normalidade, de colinearidade e de heterocedasticidade.</p>
 <p>Testando normalidade:</p>
 <pre><code class="R hljs">ols_test_normality<span class=hljs-punctuation >(</span>fit1<span class=hljs-punctuation >)</span></code></pre>
-<table><tr><th align=center >Test<th align=center >Statistic<th align=center >pvalue<tr><td align=center >Shapiro-Wilk<td align=center >0.9969<td align=center >0.6563<tr><td align=center >Kolmogorov-Smirnov<td align=center >0.0316<td align=center >0.8193<tr><td align=center >Cramer-von Mises<td align=center >27.3033<td align=center >0.0000<tr><td align=center >Anderson-Darling<td align=center >0.2778<td align=center >0.6502</table>
+<table><tr><th align=center >Test<th align=center >Statistic<th align=center >p-value<tr><td align=center >Shapiro-Wilk<td align=center >0.9969<td align=center >0.6563<tr><td align=center >Kolmogorov-Smirnov<td align=center >0.0316<td align=center >0.8193<tr><td align=center >Cramer-von Mises<td align=center >27.3033<td align=center >0.0000<tr><td align=center >Anderson-Darling<td align=center >0.2778<td align=center >0.6502</table>
 <p>O teste de Shapiro-Wilk testa a normalidade. Logo, se o valor de p for igual ou menor que 0.05, a    hipótese de normalidade será rejeitada. Os demais testes também são semelhantes, com interpretações equivalentes à de que a distribuição  desses dados é normal.</p>
 <p>Testando multicolinearidade:  VIF &#40;Variation Inflation Factor&#41; &gt; 10 representa a colinearidade entre variáveis, que nem sempre é problemática, depende da situação na vida real.  Por isso é necessário agir com cuidado quando se pretende remover variáveis que apresentam esse comportamento.</p>
 <pre><code class="R hljs">vif<span class=hljs-punctuation >(</span>fit1<span class=hljs-punctuation >)</span></code></pre>
@@ -87,7 +77,7 @@ plot<span class=hljs-punctuation >(</span>fit1<span class=hljs-punctuation >)</s
 <p><em>Non-constant Variance Score Test Variance formula: ~ fitted.values Chisquare &#61; 0.1259146, Df &#61; 1, p &#61; 0.72271</em></p>
 <p>Se o valor de p for igual ou menor que 0.05, a    hipótese de homocedastecidade será rejeitada.  Logo, nesse caso, é possível afirmar estatisticamente que os resíduos estão bem distribuídos e que o modelo cumpre as premissas estatísticas. </p>
 <div class=page-foot >
-    <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> Gabriel de Freitas Pereira. Last modified: April 28, 2022.
+    <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> Gabriel de Freitas Pereira. Last modified: June 16, 2022.
     Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
 </div>
 </div>
