@@ -105,18 +105,13 @@ gerados pela função `plot()` para fazermos as interpretações.
 
 ## Interpretação dos gráficos:
 
-- Residuals x Fitted values: demonstra se os resíduos têm padrões não lineares, 
-nesse caso a linha vermelha indica um padrão linear.
+- Residuals x Fitted values: demonstra se os resíduos têm padrões não lineares, nesse caso a linha vermelha indica um padrão linear.
 
-- Normal Q-Q: demonstra se os resíduos têm distribuição normal, nesse caso
-os resíduos seguem a distribuição normal (linha pontilhada).  
+- Normal Q-Q: demonstra se os resíduos têm distribuição normal, nesse caso os resíduos seguem a distribuição normal (linha pontilhada).  
 
-- Scale Location: demonstra se os resíduos são distribuídos ao redor dos preditores,
-esse gráfico representa a homocedastecidade (resíduos igualmente distribuídos) de forma clara.
+- Scale Location: demonstra se os resíduos são distribuídos ao redor dos preditores, esse gráfico representa a homocedastecidade (resíduos igualmente distribuídos) de forma clara.
 
-- Residuals x Leverage: pontos fora dessa distância, alcançando o extremo superior direito
-ou inferior direito com linhas pontilhadas vermelhas nessa posições indicam não linearidade
-ou a presença de outliers. Nesse caso isso não acontece.
+- Residuals x Leverage: pontos fora dessa distância, alcançando o extremo superior direito ou inferior direito com linhas pontilhadas vermelhas nessas posições indicam não linearidade ou a presença de outliers. Nesse caso isso não acontece.
 
 Além da análise gráfica, a qual pode não ser conclusiva, é possível testar numericamente
 as premissas da regressão linear. Com isso temos o teste de normalidade, de colinearidade
@@ -127,7 +122,7 @@ Testando normalidade:
 ols_test_normality(fit1)
 ```
 
-|       Test       |     Statistic    |      pvalue     |
+|       Test       |     Statistic    |      p-value    |
 |:----------------:|:----------------:|:---------------:|
 |Shapiro-Wilk      |      0.9969      |      0.6563     |
 |Kolmogorov-Smirnov|      0.0316      |      0.8193     |
