@@ -2,16 +2,50 @@
 #     chesteR - reunião presencial 02  -   Turma A   #
 ######################################################
 
-
+# atalho: ctrl + shift + R
 # Algumas funções úteis ---------------------------------------------------
 
-which()
+numeros_aleatorios <- rnorm( 50 )
 
-where()
+numeros_aleatorios[2] <- 0
 
-any()
+numeros_aleatorios[ numeros_aleatorios > 0 ]
+# equivalente
+numeros_aleatorios[ which(numeros_aleatorios >= 0) ]
 
-all()
+# exemplo
+x <- 1:10
+y <- -1:-10
+
+any( x > 0 )
+any( y > 0 )
+
+# exemplo de uso da função any e ifelse:
+ifelse( test = any( y > 0 ), yes = "sim", no = "não" )
+ifelse( test = any( y < 0 ), yes = "sim", no = "não" )
+
+# função all, mesma lógica da função any:
+all( y > 0 )
+all( x > 0)
+
+# if( condição) { o que vai ser feito com base nessa condição }
+
+# function( parâmetros ) { o que vai ser feito com base nesses parâmetros }
+
+formiga_cortadeira <- function( x ) { x + 1 }
+formiga_cortadeira(1)
+
+cupinzao <- function( x ) { plot(x, type = "l") }
+
+cupinzao( x = 1:10)
+
+
+# teste if e else if
+if( x > y ) { 
+  print( x ) 
+} else if( x < y ) {
+    print( y ) 
+} 
 
 
 
