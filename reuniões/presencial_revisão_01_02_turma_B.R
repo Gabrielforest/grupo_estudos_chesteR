@@ -55,27 +55,29 @@ aaaaaaaaa <- 1 + 1
 # agora que salvei a variável aaaaaaaaa, o código abaixo funcionará:
 dnd <- aaaaaaaaa
 
-# adição
+# adição:
 
 #ou sem espaçamento 
 
 #ou usando parênteses
 
-# subtração
+# subtração:
 
 #ou sem espaçamento 
 
 #ou usando parênteses
 
 
-# divisão
+# divisão:
 
 
-# multiplicação
+# multiplicação:
 
 
-# exponenciação pode ser feita de dois jeitos com ** ou ^
+# exponenciação pode ser feita de duas formas:
 
 #ou
 
-# resto da divisão %%
+# resto da divisão %%:
+
+# raiz quadrada:
