@@ -4,7 +4,7 @@
 
 # Subsetting
 
-x <- c( 2, 4, 3, 5 )
+x <- c( 1, 2, 4, 3, 5 )
 
 # selecionando por posições 
 
@@ -28,7 +28,7 @@ x <- c( 2, 4, 3, 5 )
 
 # introdução tibble
 
-# amostrando dados da tabela
+# amostrando dados da tabela de forma aleatória
 
 # removendo colunas atribuindo nulo
 
